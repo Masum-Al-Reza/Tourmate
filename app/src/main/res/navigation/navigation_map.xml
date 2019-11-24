@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_map"
+    app:startDestination="@id/login_fragments">
+    <fragment
+        android:id="@+id/login_fragments"
+        android:name="com.example.tourmate_final.Login_fragments"
+        android:label="fragment_login_fragments"
+        tools:layout="@layout/fragment_login_fragments" >
+        <action
+            android:id="@+id/action_login_fragments_to_eventlistfragment"
+            app:destination="@id/eventlistfragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventlistfragment"
+        android:name="com.example.tourmate_final.Eventlistfragment"
+        android:label="fragment_eventlistfragment"
+        tools:layout="@layout/fragment_eventlistfragment" >
+        <action
+            android:id="@+id/action_eventlistfragment_to_add_event_fragment"
+            app:destination="@id/add_event_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/add_event_fragment"
+        android:name="com.example.tourmate_final.Add_event_fragment"
+        android:label="fragment_add_event_fragment"
+        tools:layout="@layout/fragment_add_event_fragment" />
+</navigation>

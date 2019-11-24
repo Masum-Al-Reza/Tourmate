@@ -1,0 +1,55 @@
+package com.example.tourmate_final.repository;
+
+import android.app.Activity;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
+
+import com.example.tourmate_final.pojos.TourmateEvent;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Eventrepostitory {
+    private DatabaseReference rootref;
+    private DatabaseReference userref;
+    private  DatabaseReference eventref;
+    private FirebaseUser firebaseUser;
+    public MutableLiveData<List<TourmateEvent>> eventlistDB=new MutableLiveData<>();
+    public   Eventrepostitory(){
+        firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+        rootref= FirebaseDatabase.getInstance().getReference();
+        userref=rootref.child(firebaseUser.getUid());
+        eventref=userref.child("event");
+        eventref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<TourmateEvent> events=new ArrayList<>();
+                for (DataSnapshot d: dataSnapshot.getChildren()){
+                    events.add(d.getValue(TourmateEvent.class));
+                    eventlistDB.postValue(events);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+public  void  addevent_to_db(TourmateEvent event ){
+        String EventID=eventref.push().getKey();
+        event.setEventID(EventID);
+        eventref.child(EventID).setValue(event);
+}
+}
