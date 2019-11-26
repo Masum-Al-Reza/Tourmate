@@ -21,10 +21,26 @@
         <action
             android:id="@+id/action_eventlistfragment_to_add_event_fragment"
             app:destination="@id/add_event_fragment" />
+        <action
+            android:id="@+id/action_eventlistfragment_to_weather"
+            app:destination="@id/weather" />
+        <action
+            android:id="@+id/action_eventlistfragment_to_location"
+            app:destination="@id/location" />
     </fragment>
     <fragment
         android:id="@+id/add_event_fragment"
         android:name="com.example.tourmate_final.Add_event_fragment"
         android:label="fragment_add_event_fragment"
         tools:layout="@layout/fragment_add_event_fragment" />
+    <fragment
+        android:id="@+id/location"
+        android:name="com.example.tourmate_final.Location"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" />
+    <fragment
+        android:id="@+id/weather"
+        android:name="com.example.tourmate_final.Weather"
+        android:label="fragment_weather"
+        tools:layout="@layout/fragment_weather" />
 </navigation>

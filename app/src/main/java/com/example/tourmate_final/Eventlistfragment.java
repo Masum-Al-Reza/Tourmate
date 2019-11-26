@@ -47,6 +47,12 @@ public class Eventlistfragment extends Fragment {
             case R.id.addeventnav:
                 Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.action_eventlistfragment_to_add_event_fragment);
                 break;
+            case R.id.locationitem:
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.action_eventlistfragment_to_location);
+                break;
+            case R.id.weatheritem:
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.action_eventlistfragment_to_weather);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
