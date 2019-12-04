@@ -2,7 +2,6 @@
 package com.example.tourmate_final.current_weather;
 
 import java.util.List;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -11,9 +10,9 @@ public class CurrentWeatherResponse {
     @SerializedName("coord")
     @Expose
     private Coord coord;
-    @SerializedName("weatherweb")
+    @SerializedName("weather")
     @Expose
-    private List<WeatherWEb> weather = null;
+    private List<Weather> weather = null;
     @SerializedName("base")
     @Expose
     private String base;
@@ -28,7 +27,7 @@ public class CurrentWeatherResponse {
     private Clouds clouds;
     @SerializedName("dt")
     @Expose
-    private Integer dt;
+    private long dt;
     @SerializedName("sys")
     @Expose
     private Sys sys;
@@ -53,11 +52,11 @@ public class CurrentWeatherResponse {
         this.coord = coord;
     }
 
-    public List<WeatherWEb> getWeather() {
+    public List<Weather> getWeather() {
         return weather;
     }
 
-    public void setWeather(List<WeatherWEb> weather) {
+    public void setWeather(List<Weather> weather) {
         this.weather = weather;
     }
 
@@ -93,11 +92,11 @@ public class CurrentWeatherResponse {
         this.clouds = clouds;
     }
 
-    public Integer getDt() {
+    public long getDt() {
         return dt;
     }
 
-    public void setDt(Integer dt) {
+    public void setDt(long dt) {
         this.dt = dt;
     }
 

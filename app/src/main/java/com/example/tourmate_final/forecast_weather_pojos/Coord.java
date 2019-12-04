@@ -1,5 +1,5 @@
 
-package com.example.tourmate_final.current_weather;
+package com.example.tourmate_final.forecast_weather_pojos;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -8,24 +8,24 @@ public class Coord {
 
     @SerializedName("lon")
     @Expose
-    private double lon;
+    private Double lon;
     @SerializedName("lat")
     @Expose
-    private double lat;
+    private Double lat;
 
-    public double getLon() {
+    public Double getLon() {
         return lon;
     }
 
-    public void setLon(Integer lon) {
+    public void setLon(Double lon) {
         this.lon = lon;
     }
 
-    public double getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(Integer lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 

@@ -34,7 +34,7 @@ public class LocationViewmodel extends AndroidViewModel {
 
                 }
               locationLd.postValue(location);
-                Toast.makeText(context, "found", Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(context, "found", Toast.LENGTH_SHORT).show();
 
 
             }

@@ -21,12 +21,6 @@ public class Main {
     @SerializedName("temp_max")
     @Expose
     private Double tempMax;
-    @SerializedName("sea_level")
-    @Expose
-    private Integer seaLevel;
-    @SerializedName("grnd_level")
-    @Expose
-    private Integer grndLevel;
 
     public Double getTemp() {
         return temp;
@@ -66,22 +60,6 @@ public class Main {
 
     public void setTempMax(Double tempMax) {
         this.tempMax = tempMax;
-    }
-
-    public Integer getSeaLevel() {
-        return seaLevel;
-    }
-
-    public void setSeaLevel(Integer seaLevel) {
-        this.seaLevel = seaLevel;
-    }
-
-    public Integer getGrndLevel() {
-        return grndLevel;
-    }
-
-    public void setGrndLevel(Integer grndLevel) {
-        this.grndLevel = grndLevel;
     }
 
 }
