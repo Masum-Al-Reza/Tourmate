@@ -3,18 +3,17 @@ package com.example.tourmate_final.current_weather;
 
 import java.util.List;
 
-import com.example.tourmate_final.Weather;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Example {
+public class CurrentWeatherResponse {
 
     @SerializedName("coord")
     @Expose
     private Coord coord;
-    @SerializedName("weather")
+    @SerializedName("weatherweb")
     @Expose
-    private List<Weather> weather = null;
+    private List<WeatherWEb> weather = null;
     @SerializedName("base")
     @Expose
     private String base;
@@ -54,11 +53,11 @@ public class Example {
         this.coord = coord;
     }
 
-    public List<Weather> getWeather() {
+    public List<WeatherWEb> getWeather() {
         return weather;
     }
 
-    public void setWeather(List<Weather> weather) {
+    public void setWeather(List<WeatherWEb> weather) {
         this.weather = weather;
     }
 

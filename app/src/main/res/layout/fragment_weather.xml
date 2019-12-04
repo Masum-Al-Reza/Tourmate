@@ -4,19 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Weather">
+    tools:context=".Weather_fragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/locationTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="it will show location " />
 
     <TextView
         android:id="@+id/locationnameTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="it will show location " />
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/weathericon"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/latlongtv"/>
+
 
 </LinearLayout>

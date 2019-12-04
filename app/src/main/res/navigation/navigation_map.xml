@@ -40,7 +40,7 @@
         tools:layout="@layout/fragment_location" />
     <fragment
         android:id="@+id/weather"
-        android:name="com.example.tourmate_final.Weather"
+        android:name="com.example.tourmate_final.Weather_fragment"
         android:label="fragment_weather"
         tools:layout="@layout/fragment_weather" />
 </navigation>

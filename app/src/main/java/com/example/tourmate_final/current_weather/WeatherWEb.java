@@ -4,7 +4,7 @@ package com.example.tourmate_final.current_weather;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Weather {
+public class WeatherWEb {
 
     @SerializedName("id")
     @Expose
