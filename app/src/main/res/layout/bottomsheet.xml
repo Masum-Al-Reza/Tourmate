@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:id="@+id/bottomsheet"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    app:behavior_peekHeight='?actionBarSize'>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:paddingEnd="8dp"
+        android:paddingStart="9dp"
+        >
+        <ToggleButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:checked="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/toggleBTN"
+            android:layout_marginLeft="150dp"
+            />
+
+
+
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/forecastRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+</LinearLayout>

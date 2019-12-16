@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -16,11 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.tourmate_final.Helper.Eventutils;
 import com.example.tourmate_final.adapter.Forecast_adapter;
@@ -29,6 +36,7 @@ import com.example.tourmate_final.forecast_weather_pojos.ForecastWeatherResponse
 import com.example.tourmate_final.forecast_weather_pojos.Forecast_List;
 import com.example.tourmate_final.viewmodel.LocationViewmodel;
 import com.example.tourmate_final.viewmodel.Weatherviewmodel;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -43,13 +51,21 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class Weather_fragment extends Fragment {
     private static final String TAG = Weather_fragment.class.getSimpleName();
 
-    private TextView currentlocationTV,locationanametv,latlongtv,forecastlatlongTV;
+    private TextView currentlocationTV,locationanametv,latlongtv,forecastlatlongTV,bootomtextTV;
     private ImageView imagetv;
     private LocationViewmodel locationViewmodel;
     private Weatherviewmodel weatherviewmodel;
     private RecyclerView recyclerView;
     private Forecast_adapter forecast_adapter;
-    private String unit="metric";
+    private String unit=Eventutils.CELCIOUS_UNIT;
+    private BottomSheetBehavior bottoms;
+    private LinearLayout linearLayout;
+    private ToggleButton togglrbt;
+
+
+    public String tempunit=Eventutils.CELCIOUS_SYMBOL;
+
+    private Location currentlocation;
 
 
 
@@ -66,6 +82,7 @@ public class Weather_fragment extends Fragment {
 
         weatherviewmodel= ViewModelProviders.of(this).get(Weatherviewmodel.class);
         locationViewmodel.getcurrentlocation();
+        setHasOptionsMenu(true);
 
         return inflater.inflate(R.layout.fragment_weather, container, false);
 
@@ -75,25 +92,129 @@ public class Weather_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //currentlocationTV=view.findViewById(R.id.locationTV);
         latlongtv=view.findViewById(R.id.latlongtv);
         imagetv=view.findViewById(R.id.weathericon);
+        linearLayout=view.findViewById(R.id.bottomsheet);
+        bottoms=BottomSheetBehavior.from(linearLayout);
         recyclerView=view.findViewById(R.id.forecastRV);
+        togglrbt=view.findViewById(R.id.toggleBTN);
         forecastlatlongTV=view.findViewById(R.id.forecastlatlongtv);
         locationanametv=view.findViewById(R.id.locationnameTV);
-        locationViewmodel.locationLd.observe(this, new Observer<Location>() {
+        togglrbt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onChanged(Location location) {
-               // currentlocationTV.setText(location.getLatitude()+","+location.getLongitude());
-                initinitializestate(location);
-                initializeforecaststate(location);
-               try {
-                    latlongtoaddressname(location);
-                } catch (IOException e) {
-                    e.printStackTrace();
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    bottoms.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }else {
+                    bottoms.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 }
             }
         });
+        bottoms.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View view, int i) {
+                if (i==BottomSheetBehavior.STATE_EXPANDED){
+                    togglrbt.setChecked(true);
+                }else {
+                    togglrbt.setChecked(false);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View view, float v) {
+
+            }
+        });
+        locationViewmodel.locationLd.observe(this, new Observer<Location>() {
+            @Override
+            public void onChanged(Location location) {
+                currentlocation=location;
+                initinitializestate(location);
+                initializeforecaststate(location);
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.forecast_menu,menu);
+        SearchView searchView=(SearchView)menu.findItem(R.id.searchlocaationitem).getActionView();
+        searchView.setQueryHint("enter  city ");
+        searchView.setSubmitButtonEnabled(true);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                try {
+                    Convertqueytolatlng(query);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
+
+    private void Convertqueytolatlng(String query) throws  IOException {
+        Geocoder geocoder=new Geocoder(getActivity());
+        List<Address>addresslist=geocoder.getFromLocationName(query,1);
+        if (addresslist!=null & addresslist.size()>0){
+            double lat=addresslist.get(0).getLatitude();
+            double lon=addresslist.get(0).getLongitude();
+            currentlocation.setLatitude(lat);
+            currentlocation.setLongitude(lon);
+            initinitializestate(currentlocation);
+            initializeforecaststate(currentlocation);
+        }
+
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem furrenhite=menu.findItem(R.id.furrenhaititem);
+        MenuItem Celcious=menu.findItem(R.id.celciusitem);
+        if (unit.equals(Eventutils.CELCIOUS_UNIT)) {
+            furrenhite.setVisible(true);
+            Celcious.setVisible(false);
+        }else {
+            furrenhite.setVisible(false);
+            Celcious.setVisible(true);
+
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.furrenhaititem:
+                unit=Eventutils.FURRENHITE_UNIT;
+                tempunit=Eventutils.FURRENHITE_SYMBOL;
+                initinitializestate(currentlocation);
+                initializeforecaststate(currentlocation);
+
+                break;
+            case R.id.celciusitem:
+
+                unit=Eventutils.CELCIOUS_UNIT;
+                tempunit=Eventutils.CELCIOUS_SYMBOL;
+                initinitializestate(currentlocation);
+                initializeforecaststate(currentlocation);
+                break;
+            case  R.id.searchlocaationitem:
+
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
 
     }
 
@@ -130,20 +251,13 @@ public class Weather_fragment extends Fragment {
                // Toast.makeText(getActivity(), "image"+icon, Toast.LENGTH_SHORT).show();
 
                 Picasso.get().load(Eventutils.IMAGE_ICON_PREFIX +icon+".png").into(imagetv);
-                latlongtv.setText(temp+"\n"+date+"\n"+description);
+                latlongtv.setText(Math.round(temp)+Eventutils.DEGREE+tempunit+"\n"+date+"\n"+description);
 
             }
         });
 
     }
 
-    private void latlongtoaddressname(Location location) throws IOException {
-        Geocoder geocoder=new Geocoder(getActivity());
-        List<Address>adresslist=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-        String address=adresslist.get(0).getAddressLine(0);
-        locationanametv.setText(address);
 
-
-    }
 
 }

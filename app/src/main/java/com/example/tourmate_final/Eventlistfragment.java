@@ -4,8 +4,13 @@ package com.example.tourmate_final;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,11 +19,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.tourmate_final.adapter.EventAdapter;
+import com.example.tourmate_final.adapter.Forecast_adapter;
+import com.example.tourmate_final.pojos.TourmateEvent;
+import com.example.tourmate_final.viewmodel.Eventviewmodel;
+
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Eventlistfragment extends Fragment {
+    private RecyclerView recyclerView;
+    private EventAdapter eventAdapter;
+    private Eventviewmodel eventviewmodel;
 
 
     public Eventlistfragment() {
@@ -31,13 +46,31 @@ public class Eventlistfragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
+        eventviewmodel= ViewModelProviders.of(this).get(Eventviewmodel.class);
         return inflater.inflate(R.layout.fragment_eventlistfragment, container, false);
+
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.main_menu,menu);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recyclerView=view.findViewById(R.id.EventRV);
+        eventviewmodel.eventlistDB.observe(this, new Observer<List<TourmateEvent>>() {
+            @Override
+            public void onChanged(List<TourmateEvent> tourmateEvents) {
+
+                eventAdapter=new EventAdapter(getActivity(),tourmateEvents);
+                LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+                recyclerView.setLayoutManager(llm);
+                recyclerView.setAdapter(eventAdapter);
+            }
+        });
     }
 
     @Override

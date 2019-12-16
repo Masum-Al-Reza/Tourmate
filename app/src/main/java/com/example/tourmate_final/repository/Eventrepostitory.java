@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.tourmate_final.pojos.Moments;
 import com.example.tourmate_final.pojos.TourmateEvent;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +25,7 @@ public class Eventrepostitory {
     private  DatabaseReference eventref;
     private FirebaseUser firebaseUser;
     public MutableLiveData<List<TourmateEvent>> eventlistDB=new MutableLiveData<>();
+    public MutableLiveData<TourmateEvent> eventdetailsLD=new MutableLiveData<>();
     public   Eventrepostitory(){
         firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
         rootref= FirebaseDatabase.getInstance().getReference();
@@ -47,9 +49,24 @@ public class Eventrepostitory {
 
 
     }
+    public  MutableLiveData<TourmateEvent>  geteventdetailsbyeventid(final String eventid){
+        eventref.child(eventid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                TourmateEvent event=dataSnapshot.getValue(TourmateEvent.class);
+                eventdetailsLD.postValue(event);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });return eventdetailsLD;
+    }
 public  void  addevent_to_db(TourmateEvent event ){
         String EventID=eventref.push().getKey();
         event.setEventID(EventID);
         eventref.child(EventID).setValue(event);
 }
+
 }

@@ -48,7 +48,7 @@ public class Weather_repos {
 
     public MutableLiveData<ForecastWeatherResponse> getforecastweather(Location location, String unit, String apikey) {
         Service_api service_api=Retrofitclient.getclient().create(Service_api.class);
-        String endurl= String.format("data/2.5/forecast/daily?lat=%f&lon=%f&cnt=7&metrics=%s&appid=%s",location.getLatitude(),location.getLongitude(),unit,apikey);
+        String endurl= String.format("data/2.5/forecast/daily?lat=%f&lon=%f&cnt=7&units=%s&appid=%s",location.getLatitude(),location.getLongitude(),unit,apikey);
         service_api.getforecastweather(endurl).enqueue(new Callback<ForecastWeatherResponse>() {
             @Override
             public void onResponse(Call<ForecastWeatherResponse> call, Response<ForecastWeatherResponse> response) {

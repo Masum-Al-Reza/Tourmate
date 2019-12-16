@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_eventlistfragment_to_location"
             app:destination="@id/location" />
+        <action
+            android:id="@+id/action_eventlistfragment_to_event_details"
+            app:destination="@id/event_details" />
     </fragment>
     <fragment
         android:id="@+id/add_event_fragment"
@@ -43,4 +46,18 @@
         android:name="com.example.tourmate_final.Weather_fragment"
         android:label="fragment_weather"
         tools:layout="@layout/fragment_weather" />
+    <fragment
+        android:id="@+id/event_details"
+        android:name="com.example.tourmate_final.Event_details"
+        android:label="fragment_event_details"
+        tools:layout="@layout/fragment_event_details" >
+        <action
+            android:id="@+id/action_event_details_to_expense_details"
+            app:destination="@id/expense_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/expense_details"
+        android:name="com.example.tourmate_final.Expense_details"
+        android:label="fragment_expense_details"
+        tools:layout="@layout/fragment_expense_details" />
 </navigation>

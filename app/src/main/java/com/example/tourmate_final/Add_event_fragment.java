@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ public class Add_event_fragment extends Fragment {
     private EditText EventnameEt,destinationET,depurtureET,budgetET;
     private Button addeventBTn,DateBTn;
     private Eventviewmodel eventviewmodel;
+
     private String departureDate;
 
 
@@ -70,7 +72,7 @@ public class Add_event_fragment extends Fragment {
                 }else {
                     TourmateEvent event=new TourmateEvent(null,eventname,depurture,destination,Integer.parseInt(budget),departureDate);
                     eventviewmodel.save(event);
-
+                    Toast.makeText(getActivity(), "save"+event, Toast.LENGTH_SHORT).show();
 
                 }
 

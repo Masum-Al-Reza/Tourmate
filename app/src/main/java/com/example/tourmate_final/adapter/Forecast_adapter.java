@@ -9,7 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tourmate_final.Helper.Eventutils;
 import com.example.tourmate_final.R;
+import com.example.tourmate_final.Weather_fragment;
 import com.example.tourmate_final.forecast_weather_pojos.ForecastWeatherResponse;
 import com.example.tourmate_final.forecast_weather_pojos.Forecast_List;
 
@@ -36,7 +38,7 @@ public class Forecast_adapter extends RecyclerView.Adapter<Forecast_adapter.Fore
 
     @Override
     public void onBindViewHolder(@NonNull Forecastviewholder holder, int position) {
-        holder.tempnameTV.setText(String.valueOf(forecastList.get(position).getTemp().getMax()));
+        holder.tempnameTV.setText(String.valueOf(Math.round(forecastList.get(position).getTemp().getMax()))+Eventutils.DEGREE);
         holder.maxtempTV.setText((forecastList.get(position).getWeather().get(0).getDescription()));
       //  holder.maxtempTV.setText(forecastList.get(position).getSunrise());
 
