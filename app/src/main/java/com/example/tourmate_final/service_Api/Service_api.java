@@ -1,4 +1,4 @@
-package com.example.tourmate_final.Weatherservice;
+package com.example.tourmate_final.service_Api;
 
 import com.example.tourmate_final.current_weather.CurrentWeatherResponse;
 import com.example.tourmate_final.forecast_weather_pojos.ForecastWeatherResponse;

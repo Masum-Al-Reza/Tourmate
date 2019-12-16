@@ -1,14 +1,12 @@
 package com.example.tourmate_final.repository;
 
 import android.location.Location;
-import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.tourmate_final.Helper.Retrofitclient;
-import com.example.tourmate_final.Weatherservice.Service_api;
+import com.example.tourmate_final.service_Api.Service_api;
 import com.example.tourmate_final.current_weather.CurrentWeatherResponse;
-import com.example.tourmate_final.current_weather.Sys;
 import com.example.tourmate_final.forecast_weather_pojos.ForecastWeatherResponse;
 
 import retrofit2.Call;
@@ -22,7 +20,7 @@ public class Weather_repos {
     public MutableLiveData<ForecastWeatherResponse> forecastLD = new MutableLiveData<>();
 
     public MutableLiveData<CurrentWeatherResponse> getcurrentweahter(Location location, String unit, String apikey) {
-        Service_api Weatherapi = Retrofitclient.getclient().create(Service_api.class);
+        Service_api Weatherapi = Retrofitclient.weather_getcliet().create(Service_api.class);
         String endurl = String.format("data/2.5/weather?lat=%f&lon=%f&units=%s&appid=%s",
                 location.getLatitude(), location.getLongitude(), unit, apikey);
         Weatherapi.getcurrentweahter(endurl).enqueue(new Callback<CurrentWeatherResponse>() {
@@ -47,7 +45,7 @@ public class Weather_repos {
     }
 
     public MutableLiveData<ForecastWeatherResponse> getforecastweather(Location location, String unit, String apikey) {
-        Service_api service_api=Retrofitclient.getclient().create(Service_api.class);
+        Service_api service_api=Retrofitclient.weather_getcliet().create(Service_api.class);
         String endurl= String.format("data/2.5/forecast/daily?lat=%f&lon=%f&cnt=7&units=%s&appid=%s",location.getLatitude(),location.getLongitude(),unit,apikey);
         service_api.getforecastweather(endurl).enqueue(new Callback<ForecastWeatherResponse>() {
             @Override

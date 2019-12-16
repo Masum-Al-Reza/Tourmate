@@ -26,7 +26,7 @@
             app:destination="@id/weather" />
         <action
             android:id="@+id/action_eventlistfragment_to_location"
-            app:destination="@id/location" />
+            app:destination="@id/locationFragment" />
         <action
             android:id="@+id/action_eventlistfragment_to_event_details"
             app:destination="@id/event_details" />
@@ -37,8 +37,8 @@
         android:label="fragment_add_event_fragment"
         tools:layout="@layout/fragment_add_event_fragment" />
     <fragment
-        android:id="@+id/location"
-        android:name="com.example.tourmate_final.Location"
+        android:id="@+id/locationFragment"
+        android:name="com.example.tourmate_final.Location_fragment"
         android:label="fragment_location"
         tools:layout="@layout/fragment_location" />
     <fragment
