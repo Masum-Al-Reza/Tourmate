@@ -69,6 +69,7 @@ public class Eventlistfragment extends Fragment {
                 LinearLayoutManager llm = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(llm);
                 recyclerView.setAdapter(eventAdapter);
+
             }
         });
     }

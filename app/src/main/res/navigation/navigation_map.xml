@@ -54,10 +54,18 @@
         <action
             android:id="@+id/action_event_details_to_expense_details"
             app:destination="@id/expense_details" />
+        <action
+            android:id="@+id/action_event_details_to_moment_fragment"
+            app:destination="@id/moment_fragment" />
     </fragment>
     <fragment
         android:id="@+id/expense_details"
         android:name="com.example.tourmate_final.Expense_details"
         android:label="fragment_expense_details"
         tools:layout="@layout/fragment_expense_details" />
+    <fragment
+        android:id="@+id/moment_fragment"
+        android:name="com.example.tourmate_final.Moment_fragment"
+        android:label="fragment_moment_fragment"
+        tools:layout="@layout/fragment_moment_fragment" />
 </navigation>

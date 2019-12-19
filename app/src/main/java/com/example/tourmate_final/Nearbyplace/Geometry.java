@@ -1,25 +1,24 @@
 
 package com.example.tourmate_final.Nearbyplace;
 
-import com.example.tourmate_final.Location_fragment;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Geometry {
 
-    @SerializedName("locationFragment")
+    @SerializedName("location")
     @Expose
-    private Location_fragment locationFragment;
+    private Location location;
     @SerializedName("viewport")
     @Expose
     private Viewport viewport;
 
-    public Location_fragment getLocationFragment() {
-        return locationFragment;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLocationFragment(Location_fragment locationFragment) {
-        this.locationFragment = locationFragment;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public Viewport getViewport() {

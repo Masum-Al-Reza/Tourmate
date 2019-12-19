@@ -27,6 +27,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.List;
@@ -72,14 +73,16 @@ public class Location_fragment extends Fragment implements OnMapReadyCallback {
         ATMBN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Type="ATM";
+                googleMap.clear();
+                Type="atm";
                 getnearbyresponseData();
             }
         });
         RESTURANTBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Type="Resturant";
+                googleMap.clear();
+                Type="restaurant";
                 getnearbyresponseData();
             }
         });
@@ -108,6 +111,11 @@ public class Location_fragment extends Fragment implements OnMapReadyCallback {
             public void onChanged(NearbyplacesBody nearbyplacesBody) {
                List<Result>results= nearbyplacesBody.getResults();
                for (Result r:results){
+                   double lat = r.getGeometry().getLocation().getLat();
+                   double lng=r.getGeometry().getLocation().getLng();
+                   LatLng latLng=new LatLng(lat,lng);
+                   String name=r.getName();
+                    googleMap.addMarker(new MarkerOptions().title(name).position(latLng));
                }
             }
         });
