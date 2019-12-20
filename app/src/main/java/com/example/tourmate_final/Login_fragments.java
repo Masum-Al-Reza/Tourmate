@@ -68,9 +68,7 @@ public class Login_fragments extends Fragment {
         REgBTn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email=emalEt.getText().toString();
-                String password=passET.getText().toString();
-                loginviemodel.register(email,password);
+              Navigation.findNavController(view).navigate(R.id.action_login_fragments_to_registration_fragment);
             }
         });
 

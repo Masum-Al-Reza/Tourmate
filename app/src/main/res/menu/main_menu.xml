@@ -9,4 +9,7 @@
      android:id="@+id/weatheritem"/>
     <item android:title="Location"
        android:id="@+id/locationitem"/>
+    <item android:title="logout"
+        android:id="@+id/logoutitem"/>
+
 </menu>

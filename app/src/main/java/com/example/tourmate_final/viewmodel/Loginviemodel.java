@@ -3,7 +3,9 @@ package com.example.tourmate_final.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.tourmate_final.pojos.UserInformationPojo;
 import com.example.tourmate_final.repository.Firebase_repository;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class Loginviemodel extends ViewModel {
@@ -35,9 +37,14 @@ public Loginviemodel(){
 
         statelivedata=repository.loginfirebaseuser(email, password);
     }
-    public  void  register(String email,String password){
+    public  void  register(UserInformationPojo userInformationPojo){
 
-        statelivedata=repository.registrationuser(email, password);
+        statelivedata=repository.registrationuser(userInformationPojo);
+    }
+    public void  logout(){
+        FirebaseAuth.getInstance().signOut();
+        statelivedata.postValue(Authenticationstate.UNAUTHENTICATIONSTATED);
+
     }
 
 

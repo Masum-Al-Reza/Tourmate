@@ -23,6 +23,7 @@ import com.example.tourmate_final.adapter.EventAdapter;
 import com.example.tourmate_final.adapter.Forecast_adapter;
 import com.example.tourmate_final.pojos.TourmateEvent;
 import com.example.tourmate_final.viewmodel.Eventviewmodel;
+import com.example.tourmate_final.viewmodel.Loginviemodel;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class Eventlistfragment extends Fragment {
     private RecyclerView recyclerView;
     private EventAdapter eventAdapter;
     private Eventviewmodel eventviewmodel;
+    private Loginviemodel loginviemodel;
 
 
     public Eventlistfragment() {
@@ -47,6 +49,7 @@ public class Eventlistfragment extends Fragment {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
         eventviewmodel= ViewModelProviders.of(this).get(Eventviewmodel.class);
+        loginviemodel= ViewModelProviders.of(this).get(Loginviemodel.class);
         return inflater.inflate(R.layout.fragment_eventlistfragment, container, false);
 
     }
@@ -87,6 +90,12 @@ public class Eventlistfragment extends Fragment {
             case R.id.weatheritem:
                 Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.action_eventlistfragment_to_weather);
                 break;
+            case R.id.logoutitem:
+                loginviemodel.logout();
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.login_fragments);
+
+
+
         }
         return super.onOptionsItemSelected(item);
     }

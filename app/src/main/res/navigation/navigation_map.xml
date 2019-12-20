@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_login_fragments_to_eventlistfragment"
             app:destination="@id/eventlistfragment" />
+        <action
+            android:id="@+id/action_login_fragments_to_registration_fragment"
+            app:destination="@id/registration_fragment" />
     </fragment>
     <fragment
         android:id="@+id/eventlistfragment"
@@ -68,4 +71,13 @@
         android:name="com.example.tourmate_final.Moment_fragment"
         android:label="fragment_moment_fragment"
         tools:layout="@layout/fragment_moment_fragment" />
+    <fragment
+        android:id="@+id/registration_fragment"
+        android:name="com.example.tourmate_final.Registration_fragment"
+        android:label="fragment_registration_fragment"
+        tools:layout="@layout/fragment_registration_fragment" >
+        <action
+            android:id="@+id/action_registration_fragment_to_eventlistfragment"
+            app:destination="@id/eventlistfragment" />
+    </fragment>
 </navigation>

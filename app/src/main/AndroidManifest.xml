@@ -48,7 +48,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.noactionbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,7 +57,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".Activityrecognition_service" />
+
     </application>
 
 </manifest>
