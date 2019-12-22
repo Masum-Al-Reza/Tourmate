@@ -5,38 +5,75 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Add_event_fragment">
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/inputeventname"
+            android:hint="enter event name"/>
 
-    <EditText
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/inputeventname"
-        android:hint="enter event name"/>
-    <EditText
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/departureinput"
+            android:hint="enter depurture place"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/departureinput"
-        android:hint="enter depurture place"/>
-    <EditText
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/inputdestination"
+            android:hint="enter destination"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/inputdestination"
-        android:hint="enter destination"/>
-    <EditText
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/inputbudget"
+            android:inputType="number"
+            android:hint="enter budget"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/inputbudget"
-        android:inputType="number"
-        android:hint="enter budget"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/add_dateBTN"
-        android:text="depurture date"/>
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:focusable="false"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_dateBTN"
+            android:text="depurture date"
+
+           />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/eventaddBTn"
         android:text="Add event"/>
+    <Button
+        android:visibility="gone"
+        android:id="@+id/upateEventBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Event"
+        />
 
 
 </LinearLayout>

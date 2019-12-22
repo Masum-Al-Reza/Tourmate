@@ -40,16 +40,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/row_budget"
-            android:layout_below="@id/row_destination"
+            android:text="budget"
+            android:layout_below="@id/row_departureDate"
             android:textSize="16sp"
             android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/currenttime"
+            android:text="currwnt itme"
+            android:layout_below="@id/row_budget"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/row_departureDate"
             android:textSize="12sp"
-            android:layout_below="@id/row_budget"
+            android:text="depurturedare"
+            android:layout_below="@id/row_destination"
             android:textStyle="italic"/>
 
         <TextView
@@ -57,7 +69,7 @@
             android:layout_width="44dp"
             android:layout_height="32dp"
             android:layout_alignStart="@+id/row_depurturename"
-
+           android:text="remaining date"
             android:layout_alignParentTop="true"
             android:layout_marginStart="178dp"
             android:layout_marginTop="52dp"

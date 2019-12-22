@@ -1,12 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Eventlistfragment" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Eventlistfragment">
+    <ProgressBar
+        android:id="@+id/eventProgress"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <androidx.cardview.widget.CardView
+        android:visibility="gone"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        app:cardCornerRadius="50dp"
+        android:outlineAmbientShadowColor="@color/colorAccent"
+        android:id="@+id/nodataCV"
+        android:layout_centerInParent="true">
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center"
+
+         android:orientation="vertical">
+         <TextView
+             android:layout_gravity="center"
+             android:textSize="30sp"
+             android:text="No Event Found!"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             />
+
+         <TextView
+             android:layout_gravity="center"
+             android:textSize="25sp"
+             android:text="Tap+ Add one"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             />
+
+
+
+
+
+     </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/EventRV"
         android:layout_height="match_parent" />
-</LinearLayout>
+</RelativeLayout>

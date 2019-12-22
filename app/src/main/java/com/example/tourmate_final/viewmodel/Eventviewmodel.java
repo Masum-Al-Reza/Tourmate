@@ -41,6 +41,12 @@ public  void  save(TourmateEvent event){
 public  void geteventdetails(String eventid){
 eventdetailsLD=eventrepostitory.geteventdetailsbyeventid(eventid);
 }
+public  void  delete(TourmateEvent tourmateEvent){
+    eventrepostitory.deleteeventfromdb(tourmateEvent);
+}
+    public  void  update(TourmateEvent tourmateEvent){
+        eventrepostitory.updatefromdb(tourmateEvent);
+    }
 
 
 }

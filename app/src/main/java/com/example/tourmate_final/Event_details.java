@@ -197,8 +197,8 @@ public class Event_details extends Fragment {
                     Toast.makeText(getActivity(), "provide info", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    TourmateEvent tourmateEvent = new TourmateEvent(null, null, null, null, Integer.parseInt(amount), null);
-                    eventviewmodel.save(tourmateEvent);
+                   // TourmateEvent tourmateEvent = new TourmateEvent(null, null, null, null, Integer.parseInt(amount), null);
+                  //  eventviewmodel.save(tourmateEvent);
 
                 }
             }

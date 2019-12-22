@@ -1,8 +1,11 @@
 package com.example.tourmate_final.repository;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.tourmate_final.MainActivity;
 import com.example.tourmate_final.pojos.UserInformationPojo;
 import com.example.tourmate_final.viewmodel.Loginviemodel;
 
@@ -13,16 +16,21 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Firebase_repository {
+    private static final String TAG = MainActivity.class.getSimpleName();
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
-    private DatabaseReference rootref;
-    private DatabaseReference userref;
-    private DatabaseReference userinfo;
+    DatabaseReference rootref;
+    DatabaseReference userref;
+    DatabaseReference userinfo;
     public  MutableLiveData<Loginviemodel.Authenticationstate>statelivedata=new MutableLiveData<>();
+    public  MutableLiveData<UserInformationPojo>userinfold=new MutableLiveData<>();
     public  MutableLiveData<String>errmsg=new MutableLiveData<>();
     public  Firebase_repository(MutableLiveData<Loginviemodel.Authenticationstate> statelivedata){
 
@@ -76,9 +84,11 @@ return statelivedata;
 
                     String userid=firebaseUser.getUid();
                     userInformationPojo.setUesrID(userid);
+
                     userinfo.setValue(userInformationPojo).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+
 
                         }
                     });
@@ -96,6 +106,25 @@ return statelivedata;
 return statelivedata;
     }
 
+public  MutableLiveData<UserInformationPojo> getuserinfofromDB(){
+        rootref=FirebaseDatabase.getInstance().getReference();
+        userref=rootref.child(firebaseUser.getUid());
+        userinfo=userref.child("Loginfo");
+        userinfo.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserInformationPojo userInformationPojo=dataSnapshot.getValue(UserInformationPojo.class);
+                userinfold.postValue(userInformationPojo);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return userinfold;
+}
 
 
 }

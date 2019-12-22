@@ -7,18 +7,28 @@ public class TourmateEvent {
     private String destination;
     private int budget;
     private String departureDate;
+    private String createEventDate;
 
     public TourmateEvent() {
         //required by Firebase
     }
 
-    public TourmateEvent(String eventID, String eventName, String departurePlace, String destination, int budget, String departureDate) {
+    public TourmateEvent(String eventID, String eventName, String departurePlace, String destination, int budget, String departureDate,String createEventDate) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.departurePlace = departurePlace;
         this.destination = destination;
         this.budget = budget;
+        this.createEventDate=createEventDate;
         this.departureDate = departureDate;
+    }
+
+    public String getCreateEventDate() {
+        return createEventDate;
+    }
+
+    public void setCreateEventDate(String createEventDate) {
+        this.createEventDate = createEventDate;
     }
 
     public String getEventID() {

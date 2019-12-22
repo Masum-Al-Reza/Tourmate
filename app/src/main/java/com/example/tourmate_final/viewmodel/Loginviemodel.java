@@ -16,6 +16,7 @@ public class Loginviemodel extends ViewModel {
     }
     private Firebase_repository repository;
     public MutableLiveData<Authenticationstate>statelivedata;
+    public  MutableLiveData<UserInformationPojo>userinfold=new MutableLiveData<>();
     public  MutableLiveData<String>errmsg=new MutableLiveData<>();
 
 
@@ -41,6 +42,11 @@ public Loginviemodel(){
 
         statelivedata=repository.registrationuser(userInformationPojo);
     }
+    public  void  getuserinfo(){
+
+        userinfold=repository.getuserinfofromDB();
+    }
+
     public void  logout(){
         FirebaseAuth.getInstance().signOut();
         statelivedata.postValue(Authenticationstate.UNAUTHENTICATIONSTATED);

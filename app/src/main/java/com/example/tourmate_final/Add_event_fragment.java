@@ -7,7 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -18,8 +20,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.tourmate_final.Helper.Eventutils;
 import com.example.tourmate_final.pojos.TourmateEvent;
 import com.example.tourmate_final.viewmodel.Eventviewmodel;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,12 +33,11 @@ import java.util.Calendar;
  * A simple {@link Fragment} subclass.
  */
 public class Add_event_fragment extends Fragment {
-    private EditText EventnameEt,destinationET,depurtureET,budgetET;
-    private Button addeventBTn,DateBTn;
+    private TextInputEditText EventnameEt,destinationET,depurtureET,budgetET,DateBTn;
+    private Button addeventBTn,updateBTN;
     private Eventviewmodel eventviewmodel;
-
     private String departureDate;
-
+    private String eventID;
 
 
     public Add_event_fragment() {
@@ -47,8 +50,33 @@ public class Add_event_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         eventviewmodel= ViewModelProviders.of(this).get(Eventviewmodel.class);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            eventID = bundle.getString("id");
 
-        return inflater.inflate(R.layout.fragment_add_event_fragment, container, false);
+            eventviewmodel.geteventdetails(eventID);
+            Toast.makeText(getActivity(), "" + eventID, Toast.LENGTH_SHORT).show();
+
+            eventviewmodel.eventdetailsLD.observe(this, new Observer<TourmateEvent>() {
+                @Override
+                public void onChanged(TourmateEvent eventPojo) {
+
+                    EventnameEt.setText(eventPojo.getEventName());
+                    depurtureET.setText(eventPojo.getDeparturePlace());
+                    destinationET.setText(eventPojo.getDestination());
+                    DateBTn.setText(eventPojo.getDepartureDate());
+
+                    budgetET.setText(String.valueOf(eventPojo.getBudget()));
+                    addeventBTn.setVisibility(View.GONE);
+                    updateBTN.setVisibility(View.VISIBLE);
+
+                    departureDate = eventPojo.getDepartureDate();
+
+                }
+            });
+        }
+
+            return inflater.inflate(R.layout.fragment_add_event_fragment, container, false);
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -58,6 +86,7 @@ public class Add_event_fragment extends Fragment {
         depurtureET=view.findViewById(R.id.departureinput);
         budgetET=view.findViewById(R.id.inputbudget);
         addeventBTn=view.findViewById(R.id.eventaddBTn);
+        updateBTN=view.findViewById(R.id.upateEventBtn);
         DateBTn=view.findViewById(R.id.add_dateBTN);
         addeventBTn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,12 +99,25 @@ public class Add_event_fragment extends Fragment {
                     Toast.makeText(getActivity(), "provide all info", Toast.LENGTH_SHORT).show();
 
                 }else {
-                    TourmateEvent event=new TourmateEvent(null,eventname,depurture,destination,Integer.parseInt(budget),departureDate);
+                    TourmateEvent event=new TourmateEvent(null,eventname,depurture,destination,Integer.parseInt(budget),departureDate, Eventutils.getDateWithTime());
                     eventviewmodel.save(event);
                     Toast.makeText(getActivity(), "save"+event, Toast.LENGTH_SHORT).show();
 
                 }
 
+
+            }
+        });
+        updateBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String eventName = EventnameEt.getText().toString();
+                String startLocation = depurtureET.getText().toString();
+                String destination = destinationET.getText().toString();
+                String budget = budgetET.getText().toString();
+                TourmateEvent tourMateEventPojo = new TourmateEvent(eventID,eventName,startLocation,destination,Integer.parseInt(budget),departureDate, Eventutils.getDateWithTime());
+                eventviewmodel.update(tourMateEventPojo);
+                Navigation.findNavController(v).navigate(R.id.eventlistfragment);
 
             }
         });
@@ -100,7 +142,7 @@ public class Add_event_fragment extends Fragment {
         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
             Calendar calendar=Calendar.getInstance();
             calendar.set(i,i1,i2);
-            departureDate=new SimpleDateFormat("dd/mm/yyyy").format(calendar.getTime());
+            departureDate=new SimpleDateFormat("dd/MM/yyyy").format(calendar.getTime());
             DateBTn.setText(departureDate);
         }
     };

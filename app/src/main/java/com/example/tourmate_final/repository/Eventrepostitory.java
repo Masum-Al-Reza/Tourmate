@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.tourmate_final.pojos.Moments;
 import com.example.tourmate_final.pojos.TourmateEvent;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -55,6 +57,7 @@ public class Eventrepostitory {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 TourmateEvent event=dataSnapshot.getValue(TourmateEvent.class);
                 eventdetailsLD.postValue(event);
+
             }
 
             @Override
@@ -67,6 +70,45 @@ public  void  addevent_to_db(TourmateEvent event ){
         String EventID=eventref.push().getKey();
         event.setEventID(EventID);
         eventref.child(EventID).setValue(event);
+}
+public  void updatefromdb(TourmateEvent tourmateEvent){
+        final  String eventid=tourmateEvent.getEventID();
+        eventref.child(eventid).setValue(tourmateEvent).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+            }
+        });
+}
+public  void  deleteeventfromdb(TourmateEvent tourmateEvent){
+        final String eventid=tourmateEvent.getEventID();
+        eventref.child(eventid).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                final DatabaseReference expenseref=userref.child("EXpense");
+                expenseref.child(eventid).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        DatabaseReference momentref=expenseref.child("moment");
+                        momentref.child(eventid).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                            }
+                        });
+
+                    }
+                });
+
+            }
+        });
+
+
 }
 
 }
