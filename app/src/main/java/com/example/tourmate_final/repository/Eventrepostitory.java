@@ -69,10 +69,21 @@ public class Eventrepostitory {
 public  void  addevent_to_db(TourmateEvent event ){
         String EventID=eventref.push().getKey();
         event.setEventID(EventID);
-        eventref.child(EventID).setValue(event);
+        eventref.child(EventID).setValue(event).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
 }
 public  void updatefromdb(TourmateEvent tourmateEvent){
-        final  String eventid=tourmateEvent.getEventID();
+          String eventid=tourmateEvent.getEventID();
+          tourmateEvent.setEventID(eventid);
         eventref.child(eventid).setValue(tourmateEvent).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -80,6 +91,15 @@ public  void updatefromdb(TourmateEvent tourmateEvent){
             }
         });
 }
+    public void addMorebudget(String eventID, int amount) {
+        eventref.child(eventID).child("initialBudget").setValue(amount).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+            }
+        });
+
+    }
 public  void  deleteeventfromdb(TourmateEvent tourmateEvent){
         final String eventid=tourmateEvent.getEventID();
         eventref.child(eventid).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {

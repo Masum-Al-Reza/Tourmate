@@ -23,6 +23,8 @@ public class TourmateEvent {
         this.departureDate = departureDate;
     }
 
+
+
     public String getCreateEventDate() {
         return createEventDate;
     }

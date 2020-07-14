@@ -3,18 +3,69 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/dialogAddExpenseAmountInput"
-        android:hint="enter amount"
-        android:inputType="number"/>
+        android:layout_marginTop="26dp">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialogAddExpenseNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nikoshlight"
+            android:hint="Expense name"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialogAddExpenseAmountInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nikoshlight"
+            android:hint="Amount"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/expenseCatagories"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+
+        />
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/dialogAddExpenseNameInput"
-        android:hint="expense details" />
+        >
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:fontFamily="@font/nikoshlight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:text="Cancel"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/addbtn"
+            android:fontFamily="@font/nikoshlight"
+            android:layout_marginLeft="15dp"
+            android:textColor="#fff"
+            android:text="Add"
+            android:background="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+    </LinearLayout>
+
+
 
 </LinearLayout>

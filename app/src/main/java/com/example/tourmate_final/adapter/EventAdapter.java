@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tourmate_final.Add_event_fragment;
 import com.example.tourmate_final.Helper.Eventutils;
 import com.example.tourmate_final.MainActivity;
 import com.example.tourmate_final.R;
@@ -28,6 +29,7 @@ import java.util.List;
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
     private Context context;
     private List<TourmateEvent> eventList;
+    Bundle bundle;
     private Eventviewmodel eventviewmodel=new Eventviewmodel();
 
 
@@ -74,9 +76,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             @Override
             public void onClick(final View v) {
 
-                String eventid=eventList.get(position).getEventID();
+                final String eventid=eventList.get(position).getEventID();
                 final TourmateEvent eventPojo = eventList.get(position);
-                final Bundle bundle=new Bundle();
+                  bundle=new Bundle();
                 bundle.putString("id",eventid);
 
                 PopupMenu popupMenu = new PopupMenu(context, v);
@@ -89,10 +91,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                         switch (item.getItemId()){
 
                             case R.id.detailse_item:
-                                Navigation.findNavController(v).navigate(R.id.action_eventlistfragment_to_event_details,bundle);
+                                Navigation.findNavController(holder.itemView).navigate(R.id.action_eventlistfragment_to_event_details,bundle);
                                 break;
                             case  R.id.edit_item:
-                                Navigation.findNavController(v).navigate(R.id.action_eventlistfragment_to_add_event_fragment,bundle);
+                                Add_event_fragment.eventID = eventid;
+
+                                Navigation.findNavController(holder.itemView).navigate(R.id.action_eventlistfragment_to_add_event_fragment);
 
                                 break;
                             case  R.id.delete_item:

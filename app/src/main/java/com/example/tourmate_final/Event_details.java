@@ -12,6 +12,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -27,12 +28,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tourmate_final.Helper.Eventutils;
+import com.example.tourmate_final.adapter.ExpenselistAdapter;
 import com.example.tourmate_final.adapter.MomentsAdapter;
 import com.example.tourmate_final.pojos.EventExpense;
 import com.example.tourmate_final.pojos.Moments;
@@ -40,6 +45,9 @@ import com.example.tourmate_final.pojos.TourmateEvent;
 import com.example.tourmate_final.viewmodel.Eventviewmodel;
 import com.example.tourmate_final.viewmodel.Expense_viewmodel;
 import com.example.tourmate_final.viewmodel.MomentViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,14 +67,21 @@ public class Event_details extends Fragment {
     private static final int REQUEST_CAMERA_CODE = 111;
     private static final int REQUEST_STORAGE_CODE = 222;
     private TextView EventnameTV, totalexmenseTV, remainingbudgetTV, totalbudet;
-    private Button AddexpenseBTN, TakingphotoBTN, ViewgallleryBTN, viewexpenseBTN, addmorebudgetTV;
+    private Button  TakingphotoBTN, ViewgallleryBTN, viewexpenseBTN, addmorebudgetTV;
     private String eventid = null;
     private String currentPhotoPath;
-    int totalbudget = 0;
+    private  int totalbudget = 0;
     private List<Moments> momentsList = new ArrayList<>();
     private Eventviewmodel eventviewmodel;
     private Expense_viewmodel expense_viewmodel;
     private MomentViewModel momentViewModel;
+    private FloatingActionButton AddexpenseBTN;
+    private RecyclerView recyclerView;
+    private ExpenselistAdapter expenselistAdapter;
+    private CircularProgressBar budgetProgressbar, balanceProgressbar, expenseProgressbar;
+private CardView addExpenseCardView;
+    String exCatagories;
+
 
 
     public Event_details() {
@@ -78,6 +93,7 @@ public class Event_details extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+       // tabLayout.setVisibility(View.GONE);
         eventviewmodel = ViewModelProviders.of(this).get(Eventviewmodel.class);
         expense_viewmodel = ViewModelProviders.of(this).get(Expense_viewmodel.class);
         momentViewModel = ViewModelProviders.of(this).get(MomentViewModel.class);
@@ -100,16 +116,31 @@ public class Event_details extends Fragment {
         EventnameTV = view.findViewById(R.id.detailsEventName);
         totalexmenseTV = view.findViewById(R.id.detailsTotalExpense);
         remainingbudgetTV = view.findViewById(R.id.detailsRemainingBudget);
-        totalbudet = view.findViewById(R.id.detailsInitialBudget);
         AddexpenseBTN = view.findViewById(R.id.addExpenseBtn);
+        totalbudet = view.findViewById(R.id.detailsInitialBudget);
+        recyclerView=view.findViewById(R.id.expesnseRV);
+        budgetProgressbar=view.findViewById(R.id.BudgetProgressBar);
+        expenseProgressbar=view.findViewById(R.id.expenseProgressBar);
+        balanceProgressbar=view.findViewById(R.id.remainingProgressBar);
+        addExpenseCardView=view.findViewById(R.id.addExpenseCardView);
+
+
+        addExpenseCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showaddexpense();
+            }
+        });
+
+      /*
         viewexpenseBTN = view.findViewById(R.id.viewexpenseBtn);
         ViewgallleryBTN = view.findViewById(R.id.viewMomentBtn);
         TakingphotoBTN = view.findViewById(R.id.addMomentBtn);
 
 
-        addmorebudgetTV = view.findViewById(R.id.add_more_budgetTV);
+        addmorebudgetTV = view.findViewById(R.id.add_more_budgetTV);*/
 
-        ViewgallleryBTN.setOnClickListener(new View.OnClickListener() {
+      /*  ViewgallleryBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Bundle bundle = new Bundle();
@@ -117,7 +148,7 @@ public class Event_details extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_event_details_to_moment_fragment, bundle);
 
             }
-        });
+        });*/
         momentViewModel.momentsLD.observe(this, new Observer<List<Moments>>() {
             @Override
             public void onChanged(List<Moments> moments) {
@@ -127,21 +158,43 @@ public class Event_details extends Fragment {
             }
         });
 
-
         expense_viewmodel.expenselistLD.observe(this, new Observer<List<EventExpense>>() {
             @Override
             public void onChanged(List<EventExpense> eventExpenses) {
+                expenselistAdapter=new ExpenselistAdapter(getActivity(),eventExpenses);
+                LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+                recyclerView.setLayoutManager(llm);
+                recyclerView.setAdapter(expenselistAdapter);
+                Toast.makeText(getActivity(), "is"+eventExpenses, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+        expense_viewmodel.expenselistLD.observe(this,new Observer<List<EventExpense>>() {
+            @Override
+            public void onChanged(List<EventExpense> eventExpenses) {
                 int totalex = 0;
+                int remaining=0;
                 for (EventExpense ex : eventExpenses) {
                     totalex += ex.getAmount();
 
                 }
 
-                int remaingingbudget = totalbudget - totalex;
-                remainingbudgetTV.setText("remmaining :" + remaingingbudget);
-                totalexmenseTV.setText("total expense:" + totalex);
+                 remaining = totalbudget - totalex;
+                remainingbudgetTV.setText(String.valueOf(remaining));
+                totalexmenseTV.setText(String.valueOf(totalex));
+                int size = eventExpenses.size();
+                recyclerView.setVisibility(View.VISIBLE);
 
-                viewexpenseBTN.setOnClickListener(new View.OnClickListener() {
+                double percentage = (((double) totalex / (double) totalbudget) * 100.0);
+                final double remainingParcent = percentage - 100.0;
+                expenseProgressbar.setProgressWithAnimation((float) percentage, (long) 1000);
+                balanceProgressbar.setProgressWithAnimation((float) remainingParcent, (long) 1000);
+                budgetProgressbar.setProgressWithAnimation(100, (long) 1000);
+
+
+             /*   viewexpenseBTN.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         final Bundle bundle = new Bundle();
@@ -149,7 +202,19 @@ public class Event_details extends Fragment {
 
                         Navigation.findNavController(v).navigate(R.id.action_event_details_to_expense_details, bundle);
                     }
-                });
+                });*/
+             if (size>0){
+                 expenselistAdapter=new ExpenselistAdapter(getActivity(),eventExpenses);
+                 LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+                 recyclerView.setLayoutManager(llm);
+                 recyclerView.setAdapter(expenselistAdapter);
+                 Toast.makeText(getActivity(), "is"+eventExpenses, Toast.LENGTH_SHORT).show();
+                 addExpenseCardView.setVisibility(View.GONE);
+             }else {
+                 addExpenseCardView.setVisibility(View.VISIBLE);
+                 recyclerView.setVisibility(View.GONE);
+
+             }
 
             }
         });
@@ -173,12 +238,12 @@ public class Event_details extends Fragment {
                 showaddexpense();
             }
         });
-        addmorebudgetTV.setOnClickListener(new View.OnClickListener() {
+      /*  addmorebudgetTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showmoreexpense();
             }
-        });
+        });*/
     }
 
     private void showmoreexpense() {
@@ -191,15 +256,20 @@ public class Event_details extends Fragment {
         builder.setPositiveButton("add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                int addmorebudget = 0;
+               // int addmorebudget = 0;
                 String amount = ExpenseET.getText().toString();
                 if (amount.isEmpty()) {
                     Toast.makeText(getActivity(), "provide info", Toast.LENGTH_SHORT).show();
 
                 } else {
-                   // TourmateEvent tourmateEvent = new TourmateEvent(null, null, null, null, Integer.parseInt(amount), null);
-                  //  eventviewmodel.save(tourmateEvent);
-
+                    int currentBudget = totalbudget + Integer.parseInt(amount);
+                    eventviewmodel.addMorebudget(eventid, currentBudget);
+                  //  TourmateEvent tourmateEvent = new TourmateEvent(null, null, null, null, Integer.parseInt(amount), null);
+                 //    eventviewmodel.save(tourmateEvent);
+                   // TourmateEvent tourMateEventPojo = new TourmateEvent(eventid,null,null,null,currentBudget,null, Eventutils.getDateWithTime());
+                 //  eventviewmodel.update(tourMateEventPojo);
+                    Toast.makeText(getActivity(), "Added Budget!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                 }
             }
         });
@@ -216,9 +286,29 @@ public class Event_details extends Fragment {
         builder.setView(view);
         final EditText ExpennsenameET = view.findViewById(R.id.dialogAddExpenseNameInput);
         final EditText ExpenseET = view.findViewById(R.id.dialogAddExpenseAmountInput);
-        builder.setPositiveButton("add", new DialogInterface.OnClickListener() {
+        final Spinner expenseCatagoriesSP = view.findViewById(R.id.expenseCatagories);
+        final  Button add=view.findViewById(R.id.addbtn);
+        final  Button cancel=view.findViewById(R.id.cancelBtn);
+
+        String[] catagories = {"Select Catagories", "Food", "Transport", "Hotel", "Other"};
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, catagories);
+        expenseCatagoriesSP.setAdapter(arrayAdapter);
+        expenseCatagoriesSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                exCatagories = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        final  AlertDialog dialog = builder.create();
+        dialog.show();
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 String name = ExpennsenameET.getText().toString();
                 String amount = ExpenseET.getText().toString();
                 if (amount.isEmpty() & name.isEmpty()) {
@@ -226,14 +316,20 @@ public class Event_details extends Fragment {
                 } else {
 
                     EventExpense eventExpense = new EventExpense(null, eventid, name,
-                            Integer.parseInt(amount), Eventutils.getcurrentdate());
+                            Integer.parseInt(amount),exCatagories, Eventutils.getcurrentdate());
                     expense_viewmodel.save(eventExpense);
+                    dialog.dismiss();
                 }
             }
         });
-        builder.setNegativeButton("cancel", null);
-        AlertDialog dialog = builder.create();
-        dialog.show();
+
+       cancel.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               dialog.dismiss();
+           }
+       });
+
 
 
     }

@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Add_event_fragment">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="create your tour plan"
+        android:textSize="33sp"
+        android:textStyle="bold"
+        android:gravity="center"/>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -12,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/inputeventname"
+            android:gravity="center"
             android:hint="enter event name"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -22,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/departureinput"
-            android:hint="enter depurture place"/>
+            android:gravity="center"
+            android:hint="Start location"/>
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -32,6 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/inputdestination"
+            android:gravity="center"
+
             android:hint="enter destination"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -43,6 +54,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/inputbudget"
             android:inputType="number"
+            android:gravity="center"
+
             android:hint="enter budget"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -56,8 +69,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/add_dateBTN"
             android:text="depurture date"
-
-           />
+            android:gravity="center"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -22,4 +22,17 @@ public class Expense_viewmodel extends ViewModel {
    public  void getallexpenses(String eventid){
        expenselistLD=expense_repository.getexpenselists(eventid);
    }
+
+    public void updateExpense(EventExpense expensePojo)
+    {
+        expense_repository.updateExpense(expensePojo);
+    }
+
+    public void DeleteExpense(EventExpense expensePojo)
+    {
+        expense_repository.deleteExpenseFromDB(expensePojo);
+    }
+
+
+
 }

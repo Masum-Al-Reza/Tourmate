@@ -47,6 +47,11 @@ public  void  delete(TourmateEvent tourmateEvent){
     public  void  update(TourmateEvent tourmateEvent){
         eventrepostitory.updatefromdb(tourmateEvent);
     }
+    public void addMorebudget(String eventID,int amount)
+    {
+        eventrepostitory.addMorebudget(eventID,amount);
+
+    }
 
 
 }

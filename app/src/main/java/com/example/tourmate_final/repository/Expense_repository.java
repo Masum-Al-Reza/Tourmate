@@ -52,4 +52,18 @@ public class Expense_repository  {
       });
       return expenselistLD;
    }
+
+    public void deleteExpenseFromDB(EventExpense expensePojo)
+    {
+        String expenseId =expensePojo.getExpenseId();
+        Expenseref.child(expensePojo.getEventId()).child(expenseId).removeValue();
+
+    }
+    public void updateExpense(EventExpense expensePojo)
+    {
+        String expenseId =expensePojo.getExpenseId();
+        expensePojo.setExpenseId(expenseId);
+        Expenseref.child(expensePojo.getEventId()).child(expenseId).setValue(expensePojo);
+
+    }
 }

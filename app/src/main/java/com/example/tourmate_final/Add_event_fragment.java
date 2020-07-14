@@ -36,8 +36,9 @@ public class Add_event_fragment extends Fragment {
     private TextInputEditText EventnameEt,destinationET,depurtureET,budgetET,DateBTn;
     private Button addeventBTn,updateBTN;
     private Eventviewmodel eventviewmodel;
-    private String departureDate;
-    private String eventID;
+    private String departureDate="";
+    public static String eventID="";
+    private String updateEventID ;
 
 
     public Add_event_fragment() {
@@ -50,9 +51,10 @@ public class Add_event_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         eventviewmodel= ViewModelProviders.of(this).get(Eventviewmodel.class);
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            eventID = bundle.getString("id");
+     //   Bundle bundle = getArguments();
+        if (eventID.isEmpty()) {
+        }else {
+          //  eventID = bundle.getString("id");
 
             eventviewmodel.geteventdetails(eventID);
             Toast.makeText(getActivity(), "" + eventID, Toast.LENGTH_SHORT).show();
@@ -60,18 +62,25 @@ public class Add_event_fragment extends Fragment {
             eventviewmodel.eventdetailsLD.observe(this, new Observer<TourmateEvent>() {
                 @Override
                 public void onChanged(TourmateEvent eventPojo) {
+try {
 
-                    EventnameEt.setText(eventPojo.getEventName());
-                    depurtureET.setText(eventPojo.getDeparturePlace());
-                    destinationET.setText(eventPojo.getDestination());
-                    DateBTn.setText(eventPojo.getDepartureDate());
+    EventnameEt.setText(eventPojo.getEventName());
+    depurtureET.setText(eventPojo.getDeparturePlace());
+    destinationET.setText(eventPojo.getDestination());
+    DateBTn.setText(eventPojo.getDepartureDate());
 
-                    budgetET.setText(String.valueOf(eventPojo.getBudget()));
-                    addeventBTn.setVisibility(View.GONE);
-                    updateBTN.setVisibility(View.VISIBLE);
+    budgetET.setText(String.valueOf(eventPojo.getBudget()));
+    addeventBTn.setVisibility(View.GONE);
+    updateBTN.setVisibility(View.VISIBLE);
 
-                    departureDate = eventPojo.getDepartureDate();
+    departureDate = eventPojo.getDepartureDate();
 
+    updateEventID = eventID;
+    eventID = "";
+}
+catch (Exception e){
+
+}
                 }
             });
         }
@@ -115,7 +124,7 @@ public class Add_event_fragment extends Fragment {
                 String startLocation = depurtureET.getText().toString();
                 String destination = destinationET.getText().toString();
                 String budget = budgetET.getText().toString();
-                TourmateEvent tourMateEventPojo = new TourmateEvent(eventID,eventName,startLocation,destination,Integer.parseInt(budget),departureDate, Eventutils.getDateWithTime());
+                TourmateEvent tourMateEventPojo = new TourmateEvent(updateEventID,eventName,startLocation,destination,Integer.parseInt(budget),departureDate, Eventutils.getDateWithTime());
                 eventviewmodel.update(tourMateEventPojo);
                 Navigation.findNavController(v).navigate(R.id.eventlistfragment);
 

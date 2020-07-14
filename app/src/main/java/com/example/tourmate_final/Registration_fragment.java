@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -13,6 +14,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,7 +28,7 @@ import com.example.tourmate_final.viewmodel.Loginviemodel;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Registration_fragment extends Fragment {
+public class  Registration_fragment extends Fragment {
     private EditText nameET,EmailEt,passwordET,confirmET;
     private Button registerBTN;
     private TextView showError;
@@ -37,9 +39,17 @@ public class Registration_fragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        (getActivity()).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater
+            , ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         loginviemodel= ViewModelProviders.of(this).get(Loginviemodel.class);

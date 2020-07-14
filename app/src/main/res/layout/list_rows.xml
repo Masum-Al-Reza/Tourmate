@@ -6,63 +6,177 @@
     android:elevation="7dp"
     android:clickable="true"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <RelativeLayout
+    android:layout_height="174dp">
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        android:weightSum="3.5">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="3">
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fontFamily="sans-serif-black"
+    android:text="name of tour"
+    android:gravity="center"
+    android:textSize="22dp"
+    android:id="@+id/row_eventName"/>
+<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+    android:gravity="center"
+            android:orientation="horizontal">
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_location_on_black_24dp"
+    />
+
+            <TextView
+                android:id="@+id/row_depurturename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/row_eventName"
+                android:text="departure"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="6dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/row_eventName"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:layout_marginLeft="150dp"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/row_depurturename"
-            android:textSize="16sp"
-            android:layout_below="@id/row_eventName"
-            android:textStyle="bold"/>
+        android:src="@drawable/ic_baseline_arrow_right_alt_24"
+        />
 
-        <TextView
-            android:id="@+id/row_destination"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/row_depurturename"
-
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/row_budget"
-            android:text="budget"
-            android:layout_below="@id/row_departureDate"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/currenttime"
-            android:text="currwnt itme"
-            android:layout_below="@id/row_budget"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/row_destination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="destination"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/row_departureDate"
-            android:textSize="12sp"
-            android:text="depurturedare"
-            android:layout_below="@id/row_destination"
-            android:textStyle="italic"/>
+                <TextView
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                    android:fontFamily="@font/fontlight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Going Date:"
+                    android:textColor="#3B1492" />
+                <TextView
+                    android:fontFamily="@font/fontlight"
+                    android:id="@+id/row_departureDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="23/32/12"
+                    android:textColor="#3B1492" />
+            </LinearLayout>
+            <LinearLayout
+
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/ic_monetization_on_black_24dp"
+                    android:fontFamily="@font/fontlight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="  Budget:"
+                    android:textColor="#3B1492"
+                    />
+
+                <TextView
+                    android:fontFamily="@font/nikoshlight"
+                    android:id="@+id/row_budget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:text="1000"
+                    android:textColor="#3B1492"                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_marginLeft="6dp"
+                    android:textColor="#3B1492"
+                    android:fontFamily="@font/thinfont"
+                    android:id="@+id/currenttime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="23/32/19 02:34 PM" />
+
+                <TextView
+                    android:id="@+id/row_remaining"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/fontlight"
+                    android:gravity="center"
+                    android:text="Have a Safe Journey"
+                    android:textColor="#D67285" />
+
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/row_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="&#8942;"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:padding="20dp"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+      <!--
+
+
+
+
+
+
+
+
 
         <TextView
             android:id="@+id/row_remaining"
@@ -86,7 +200,6 @@
             android:layout_alignParentEnd="true"
             android:padding="20dp"
             android:layout_centerInParent="true"/>
-
-    </RelativeLayout>
+-->
 
 </androidx.cardview.widget.CardView>
