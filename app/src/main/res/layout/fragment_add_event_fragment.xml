@@ -6,14 +6,22 @@
     android:orientation="vertical"
     tools:context=".Add_event_fragment">
     <TextView
+        android:textColor="#171C7A"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="create your tour plan"
         android:textSize="33sp"
         android:textStyle="bold"
         android:gravity="center"/>
+    <View
+        android:layout_gravity="center"
+        android:layout_width="210dp"
+        android:layout_height="1dp"
+        android:background="#20059E"
+        />
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -67,6 +75,7 @@
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_keyboard_arrow_down_black_24dp"
             android:id="@+id/add_dateBTN"
             android:text="depurture date"
             android:gravity="center"
@@ -74,19 +83,29 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_ui"
+        android:layout_marginTop="20dp"
+        android:text="Add Event"
         android:id="@+id/eventaddBTn"
-        android:text="Add event"/>
+        android:textAllCaps="false"
+        android:layout_gravity="center"
+        android:textColor="@color/colorWhite" />
     <Button
-        android:visibility="gone"
-        android:id="@+id/upateEventBtn"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_ui"
         android:text="Update Event"
-        />
+        android:id="@+id/upateEventBtn"
+        android:layout_marginTop="20dp"
+        android:textAllCaps="false"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:textColor="@color/colorWhite" />
+
+
 
 
 </LinearLayout>

@@ -13,6 +13,9 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,6 +30,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.zip.Inflater;
 
 
 /**
@@ -104,10 +108,16 @@ catch (Exception e){
                 String destination=destinationET.getText().toString();
                 String depurture=depurtureET.getText().toString();
                 String budget=budgetET.getText().toString();
-                if (eventname.isEmpty() && destination.isEmpty() &&depurture.isEmpty() && budget.isEmpty()){
-                    Toast.makeText(getActivity(), "provide all info", Toast.LENGTH_SHORT).show();
-
-                }else {
+                if (eventname.isEmpty()) {
+                    EventnameEt.setError("Provide event name!");
+                } else if (depurture.isEmpty()) {
+                    depurtureET.setError("Provide start location!");
+                } else if (destination.isEmpty()) {
+                    destinationET.setError("Provide destination location!");
+                } else if (budget.isEmpty()) {
+                    budgetET.setError("Provide budget amount!");
+                }
+               else {
                     TourmateEvent event=new TourmateEvent(null,eventname,depurture,destination,Integer.parseInt(budget),departureDate, Eventutils.getDateWithTime());
                     eventviewmodel.save(event);
                     Toast.makeText(getActivity(), "save"+event, Toast.LENGTH_SHORT).show();
@@ -117,6 +127,7 @@ catch (Exception e){
 
             }
         });
+
         updateBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

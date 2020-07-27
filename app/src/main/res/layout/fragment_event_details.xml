@@ -58,7 +58,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/proggresbar"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/detailsEventName">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="10dp">
     <LinearLayout
         android:layout_margin="3dp"
         android:layout_width="match_parent"
@@ -222,12 +229,13 @@ android:layout_marginTop="30dp"/>
         
         
     </LinearLayout>
+        </androidx.cardview.widget.CardView>
         <View
             android:id="@+id/voew"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_margin="10dp"
-            android:layout_below="@id/progresall"
+            android:layout_below="@id/card"
             android:background="#ccc"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/expesnseRV"

@@ -80,4 +80,24 @@
             android:id="@+id/action_registration_fragment_to_eventlistfragment"
             app:destination="@id/eventlistfragment" />
     </fragment>
+    <fragment
+        android:id="@+id/momentGallary"
+        android:name="com.example.tourmate_final.MomentGallary"
+        android:label="fragment_moment_gallary"
+        tools:layout="@layout/fragment_moment_gallary" />
+    <fragment
+        android:id="@+id/webview_location"
+        android:name="com.example.tourmate_final.Webview_location"
+        android:label="fragment_webview_location"
+        tools:layout="@layout/fragment_webview_location" />
+    <fragment
+        android:id="@+id/campass_fragmen"
+        android:name="com.example.tourmate_final.Campass_fragmen"
+        android:label="fragment_campass_fragmen"
+        tools:layout="@layout/fragment_campass_fragmen" />
+    <fragment
+        android:id="@+id/map_dashboard"
+        android:name="com.example.tourmate_final.Map_dashboard"
+        android:label="fragment_map_dashboard"
+        tools:layout="@layout/fragment_map_dashboard" />
 </navigation>

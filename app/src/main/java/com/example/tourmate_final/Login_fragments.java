@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,9 +31,10 @@ import com.example.tourmate_final.viewmodel.Loginviemodel;
  */
 public class Login_fragments extends Fragment {
     private EditText emalEt,passET;
-    private Button loginBTn,REgBTn;
+    private Button loginBTn;
     private TextView statustTV;
     private Loginviemodel loginviemodel;
+    private ImageView REgBTn;
 
 
 

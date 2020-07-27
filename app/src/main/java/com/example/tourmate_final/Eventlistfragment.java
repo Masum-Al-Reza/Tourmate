@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.tourmate_final.adapter.EventAdapter;
 import com.example.tourmate_final.adapter.Forecast_adapter;
@@ -35,6 +37,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class Eventlistfragment extends Fragment {
+    private static final String TAG = Eventlistfragment.class.getSimpleName();
     private RecyclerView recyclerView;
     private EventAdapter eventAdapter;
     private ProgressBar progressBarevent;
@@ -65,11 +68,7 @@ public class Eventlistfragment extends Fragment {
 
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main_menu,menu);
-    }
+
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
@@ -87,6 +86,7 @@ public class Eventlistfragment extends Fragment {
             @Override
             public void onChanged(List<TourmateEvent> tourmateEvents) {
                 int size=tourmateEvents.size();
+
                 if (size<=0){
                     nodataevent.setVisibility(View.VISIBLE);
                     progressBarevent.setVisibility(View.GONE);
@@ -104,28 +104,7 @@ public class Eventlistfragment extends Fragment {
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
-            case R.id.addeventnav:
-                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.action_eventlistfragment_to_add_event_fragment);
-                break;
-            case R.id.locationitem:
-                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.action_eventlistfragment_to_location);
-                break;
-            case R.id.weatheritem:
-                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.action_eventlistfragment_to_weather);
-                break;
-            case R.id.logoutitem:
-                loginviemodel.logout();
-                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.login_fragments);
-
-
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
     }
 
 

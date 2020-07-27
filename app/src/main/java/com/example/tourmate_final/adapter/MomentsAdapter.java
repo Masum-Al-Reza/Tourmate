@@ -1,3 +1,4 @@
+/*
 package com.example.tourmate_final.adapter;
 
 import android.content.Context;
@@ -51,3 +52,4 @@ public class MomentsAdapter extends RecyclerView.Adapter<MomentsAdapter.MomentVi
         }
     }
 }
+*/

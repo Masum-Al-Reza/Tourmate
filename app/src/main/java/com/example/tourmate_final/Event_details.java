@@ -26,6 +26,9 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -38,13 +41,13 @@ import android.widget.Toast;
 
 import com.example.tourmate_final.Helper.Eventutils;
 import com.example.tourmate_final.adapter.ExpenselistAdapter;
-import com.example.tourmate_final.adapter.MomentsAdapter;
+
 import com.example.tourmate_final.pojos.EventExpense;
-import com.example.tourmate_final.pojos.Moments;
+
 import com.example.tourmate_final.pojos.TourmateEvent;
 import com.example.tourmate_final.viewmodel.Eventviewmodel;
 import com.example.tourmate_final.viewmodel.Expense_viewmodel;
-import com.example.tourmate_final.viewmodel.MomentViewModel;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
@@ -64,17 +67,13 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  */
 public class Event_details extends Fragment {
     private static final String TAG = Event_details.class.getSimpleName();
-    private static final int REQUEST_CAMERA_CODE = 111;
-    private static final int REQUEST_STORAGE_CODE = 222;
-    private TextView EventnameTV, totalexmenseTV, remainingbudgetTV, totalbudet;
-    private Button  TakingphotoBTN, ViewgallleryBTN, viewexpenseBTN, addmorebudgetTV;
+     private TextView EventnameTV, totalexmenseTV, remainingbudgetTV, totalbudet;
     private String eventid = null;
-    private String currentPhotoPath;
     private  int totalbudget = 0;
-    private List<Moments> momentsList = new ArrayList<>();
+
     private Eventviewmodel eventviewmodel;
     private Expense_viewmodel expense_viewmodel;
-    private MomentViewModel momentViewModel;
+
     private FloatingActionButton AddexpenseBTN;
     private RecyclerView recyclerView;
     private ExpenselistAdapter expenselistAdapter;
@@ -88,6 +87,33 @@ private CardView addExpenseCardView;
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.add_more_expense,menu);
+
+
+
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.add_more_budget:
+                showmoreexpense();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -96,13 +122,13 @@ private CardView addExpenseCardView;
        // tabLayout.setVisibility(View.GONE);
         eventviewmodel = ViewModelProviders.of(this).get(Eventviewmodel.class);
         expense_viewmodel = ViewModelProviders.of(this).get(Expense_viewmodel.class);
-        momentViewModel = ViewModelProviders.of(this).get(MomentViewModel.class);
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             eventid = bundle.getString("id");
             eventviewmodel.geteventdetails(eventid);
             expense_viewmodel.getallexpenses(eventid);
-            momentViewModel.getMoments(eventid);
+
 
 
         }
@@ -132,31 +158,7 @@ private CardView addExpenseCardView;
             }
         });
 
-      /*
-        viewexpenseBTN = view.findViewById(R.id.viewexpenseBtn);
-        ViewgallleryBTN = view.findViewById(R.id.viewMomentBtn);
-        TakingphotoBTN = view.findViewById(R.id.addMomentBtn);
 
-
-        addmorebudgetTV = view.findViewById(R.id.add_more_budgetTV);*/
-
-      /*  ViewgallleryBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Bundle bundle = new Bundle();
-                bundle.putString("id", eventid);
-                Navigation.findNavController(v).navigate(R.id.action_event_details_to_moment_fragment, bundle);
-
-            }
-        });*/
-        momentViewModel.momentsLD.observe(this, new Observer<List<Moments>>() {
-            @Override
-            public void onChanged(List<Moments> moments) {
-                momentsList = moments;
-                Toast.makeText(getActivity(), "this" + moments.size(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
         expense_viewmodel.expenselistLD.observe(this, new Observer<List<EventExpense>>() {
             @Override

@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private boolean isExit = false;
     private boolean isBack = false;
     private TabLayout tabLayout;
-    private String eventId;
+    public static String eventid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 //tab_layout
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Event List"));
-        tabLayout.addTab(tabLayout.newTab().setText("New Event"));
+        tabLayout.addTab(tabLayout.newTab().setText("Event List").setIcon(R.drawable.ic_event_note_black_24dp));
+        tabLayout.addTab(tabLayout.newTab().setText("New Event").setIcon(R.drawable.ic_add_circle_black_24dp));
         tabLayout.setSelected(true);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
@@ -166,7 +166,7 @@ break;
                         isBack=true;
                         isExit=false;
                         break;
-                    case R.id.moment_fragment:
+                    case R.id.momentGallary:
                         bottomNavigationView.setVisibility(View.VISIBLE);
 tabLayout.setVisibility(View.GONE);
                         isBack = true;
@@ -186,6 +186,8 @@ isExit=false;
     BottomNavigationView.OnNavigationItemSelectedListener nalistener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            final Bundle bundle = new Bundle();
+            bundle.putString("id", eventid);
 
 
             switch (menuItem.getItemId()){
@@ -194,11 +196,11 @@ isExit=false;
                     break;
 
                 case R.id.bottom_nav_moment:
-                    Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment).navigate(R.id.moment_fragment);
+                    Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment).navigate(R.id.momentGallary,bundle);
 
                     break;
                 case R.id.botton_nav_expense:
-                    Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment).navigate(R.id.event_details);
+                    Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment).navigate(R.id.event_details,bundle);
 
                     break;
                 default:
@@ -269,20 +271,24 @@ isExit=false;
 
                 break;
             case R.id.nav_nearby:
-                Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment).navigate(R.id.locationFragment);
+                Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment).navigate(R.id.map_dashboard);
 
                 break;
             case R.id.nav_compass:
+                Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment).navigate(R.id.campass_fragmen);
+
                 break;
             case R.id.nav_exit:
+                this.finish();
+
                 break;
             case R.id.nav_logout:
                             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Are you sure you want to exit?")
+                builder.setMessage("Are you sure you want to Logout?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                loginviemodel.logout();
+                               loginviemodel.logout();
                                 Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment).navigate(R.id.login_fragments);
 
                             }
@@ -292,8 +298,8 @@ isExit=false;
                                 dialog.cancel();
                             }
                         });
-                AlertDialog alert = builder.create();
-                alert.show();
+                AlertDialog alert3 = builder.create();
+                alert3.show();
                 break;
             case R.id.nav_weather:
                 Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment).navigate(R.id.weather);

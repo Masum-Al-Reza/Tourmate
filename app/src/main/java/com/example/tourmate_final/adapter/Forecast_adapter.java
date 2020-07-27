@@ -21,6 +21,7 @@ import java.util.List;
 public class Forecast_adapter extends RecyclerView.Adapter<Forecast_adapter.Forecastviewholder> {
     private Context context;
     private List<Forecast_List>forecastList;
+    private String tempunit ;
 
     public Forecast_adapter(Context context, List<Forecast_List> forecastList) {
         this.context = context;
@@ -38,10 +39,13 @@ public class Forecast_adapter extends RecyclerView.Adapter<Forecast_adapter.Fore
 
     @Override
     public void onBindViewHolder(@NonNull Forecastviewholder holder, int position) {
-        holder.tempnameTV.setText(String.valueOf(Math.round(forecastList.get(position).getTemp().getMax()))+Eventutils.DEGREE);
-        holder.maxtempTV.setText((forecastList.get(position).getWeather().get(0).getDescription()));
-      //  holder.maxtempTV.setText(forecastList.get(position).getSunrise());
+        holder.tempnameTV.setText(String.valueOf(Math.round(forecastList.get(position).getTemp().getMin()))+Eventutils.DEGREE+tempunit);
+        holder.maxtempTV.setText(String.valueOf(Math.round(forecastList.get(position).getTemp().getMax()))+Eventutils.DEGREE+tempunit);
 
+        holder.row_forcast_sunrise.setText(Eventutils.getTime(forecastList.get(position).getSunrise()));
+        holder.row_forcast_sunset.setText(Eventutils.getTime(forecastList.get(position).getSunset()));
+        holder.row_forcast_date.setText((Eventutils.getformatteddate(forecastList.get(position).getDt())));
+        holder.row_forcast_status.setText(forecastList.get(position).getWeather().get(0).getDescription());
 
     }
 
@@ -52,11 +56,15 @@ public class Forecast_adapter extends RecyclerView.Adapter<Forecast_adapter.Fore
 
     class Forecastviewholder extends RecyclerView.ViewHolder{
 
-private TextView tempnameTV,maxtempTV;
+private TextView tempnameTV,maxtempTV,row_forcast_sunrise,row_forcast_sunset,row_forcast_status,row_forcast_date;
         public Forecastviewholder(@NonNull View itemView) {
             super(itemView);
-            tempnameTV=itemView.findViewById(R.id.row_forecastTep);
-            maxtempTV=itemView.findViewById(R.id.row_forecastmintemp);
+            tempnameTV=itemView.findViewById(R.id.row_forcast_min);
+            maxtempTV=itemView.findViewById(R.id.row_forcast_temp_max);
+            row_forcast_sunrise=itemView.findViewById(R.id.row_forcast_sunrise);
+            row_forcast_sunset=itemView.findViewById(R.id.row_forcast_sunset);
+            row_forcast_status=itemView.findViewById(R.id.row_forcast_status);
+            row_forcast_date=itemView.findViewById(R.id.row_forcast_date);
         }
 
 }

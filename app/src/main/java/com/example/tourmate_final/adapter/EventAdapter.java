@@ -125,7 +125,23 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
             }
         });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                String eventid = eventList.get(position).getEventID();
+                final TourmateEvent eventPojo = eventList.get(position);
+
+                final Bundle bundle = new Bundle();
+                bundle.putString("id",eventid);
+                MainActivity.eventid = eventid;
+                Navigation.findNavController(holder.itemView).navigate(R.id.event_details,bundle);
+
+
+
+
+            }
+        });
 
     }
 

@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Eventutils {
-    public  static  final  String IMAGE_ICON_PREFIX="https://openweathermap.org/img/wn";
+    public  static  final  String IMAGE_ICON_PREFIX="https://openweathermap.org/img/wn/";
     public  static  final  String DEGREE="\u00B0";
     public  static  final  String FURRENHITE_SYMBOL="F";
     public  static  final  String CELCIOUS_SYMBOL="C";
@@ -60,6 +60,11 @@ public class Eventutils {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+    public static String getTime(long dt) {
+        Date date = new Date(dt * 1000);
+        return new SimpleDateFormat(" hh:mm aa")
+                .format(date);
     }
 
 }

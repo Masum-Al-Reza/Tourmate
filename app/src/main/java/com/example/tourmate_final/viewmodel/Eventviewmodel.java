@@ -26,7 +26,7 @@ import retrofit2.http.Url;
 
 public class Eventviewmodel extends ViewModel {
 private Eventrepostitory eventrepostitory;
-    public MutableLiveData<List<TourmateEvent>> eventlistDB=new MutableLiveData<>();
+    public MutableLiveData<List<TourmateEvent>> eventlistDB;
     public MutableLiveData<TourmateEvent> eventdetailsLD=new MutableLiveData<>();
 
 public Eventviewmodel(){

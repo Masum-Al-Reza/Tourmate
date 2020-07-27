@@ -51,7 +51,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class Weather_fragment extends Fragment {
     private static final String TAG = Weather_fragment.class.getSimpleName();
 
-    private TextView currentlocationTV,locationanametv,latlongtv,forecastlatlongTV,bootomtextTV;
+    private TextView currentlocationTV,locationanametv,latlongtv,forecastlatlongTV,bootomtextTV,tempdate,weatherStatus,sunrisetv,sunsettv,humeditytv,pressuretv;
     private ImageView imagetv;
     private LocationViewmodel locationViewmodel;
     private Weatherviewmodel weatherviewmodel;
@@ -92,14 +92,21 @@ public class Weather_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        latlongtv=view.findViewById(R.id.latlongtv);
-        imagetv=view.findViewById(R.id.weathericon);
+       latlongtv=view.findViewById(R.id.teprature);
+         imagetv=view.findViewById(R.id.weatherIcon);
         linearLayout=view.findViewById(R.id.bottomsheet);
         bottoms=BottomSheetBehavior.from(linearLayout);
         recyclerView=view.findViewById(R.id.forecastRV);
         togglrbt=view.findViewById(R.id.toggleBTN);
-        forecastlatlongTV=view.findViewById(R.id.forecastlatlongtv);
-        locationanametv=view.findViewById(R.id.locationnameTV);
+        tempdate=view.findViewById(R.id.temp_time);
+        humeditytv=view.findViewById(R.id.humedity);
+        pressuretv=view.findViewById(R.id.pressureTV);
+        sunrisetv=view.findViewById(R.id.sunriseTV);
+        sunsettv=view.findViewById(R.id.sunsetTV);
+        weatherStatus=view.findViewById(R.id.weatherStatus);
+
+    //    forecastlatlongTV=view.findViewById(R.id.forecastlatlongtv);
+        currentlocationTV=view.findViewById(R.id.currentlocationTV);
         togglrbt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -131,6 +138,11 @@ public class Weather_fragment extends Fragment {
                 currentlocation=location;
                 initinitializestate(location);
                 initializeforecaststate(location);
+                try {
+                    convertLatLngToStreetAddress(location);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
@@ -175,6 +187,14 @@ public class Weather_fragment extends Fragment {
             initializeforecaststate(currentlocation);
         }
 
+    }
+
+    private void convertLatLngToStreetAddress(Location location) throws IOException {
+        Geocoder geocoder = new Geocoder(getActivity());
+        List<Address> addressList = geocoder.getFromLocation(location.getLatitude(),
+                location.getLongitude(), 1);
+        String address = addressList.get(0).getAddressLine(0);
+        currentlocationTV.setText(address);
     }
 
     @Override
@@ -247,11 +267,22 @@ public class Weather_fragment extends Fragment {
                 String icon=response.getWeather().get(0).getIcon();
                 double wind=response.getWind().getSpeed();
                 String description=response.getWeather().get(0).getDescription();
+                String sunrise= Eventutils.getTime(response.getSys().getSunrise());
+                String sunset= Eventutils.getTime(response.getSys().getSunset());
+                String pressure= String.valueOf(response.getMain().getPressure());
+                String humedity= String.valueOf(response.getMain().getHumidity());
 
                // Toast.makeText(getActivity(), "image"+icon, Toast.LENGTH_SHORT).show();
 
                 Picasso.get().load(Eventutils.IMAGE_ICON_PREFIX +icon+".png").into(imagetv);
-                latlongtv.setText(Math.round(temp)+Eventutils.DEGREE+tempunit+"\n"+date+"\n"+description);
+               latlongtv.setText(Math.round(temp)+Eventutils.DEGREE+tempunit);
+                tempdate.setText(date);
+                weatherStatus.setText(description);
+                sunrisetv.setText(sunrise);
+                sunsettv.setText(sunset);
+                pressuretv.setText(pressure);
+                humeditytv.setText(humedity+"%");
+                currentlocationTV.setText(city);
 
             }
         });

@@ -1,6 +1,7 @@
 package com.example.tourmate_final.repository;
 
 import android.os.Environment;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -43,6 +44,7 @@ public class MomentRepository {
     public void addNewMoment(Moments moments){
         String momentId = momentsRef.push().getKey();
         moments.setMomentId(momentId);
+        Log.e("momentId", "upload completed");
         momentsRef.child(moments.getEventId())
                 .child(momentId)
                 .setValue(moments);

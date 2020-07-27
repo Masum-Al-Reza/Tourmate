@@ -26,9 +26,10 @@ public class Eventrepostitory {
     private DatabaseReference userref;
     private  DatabaseReference eventref;
     private FirebaseUser firebaseUser;
-    public MutableLiveData<List<TourmateEvent>> eventlistDB=new MutableLiveData<>();
+    public MutableLiveData<List<TourmateEvent>> eventlistDB;
     public MutableLiveData<TourmateEvent> eventdetailsLD=new MutableLiveData<>();
     public   Eventrepostitory(){
+        eventlistDB = new MutableLiveData<>();
         firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
         rootref= FirebaseDatabase.getInstance().getReference();
         userref=rootref.child(firebaseUser.getUid());
@@ -39,8 +40,9 @@ public class Eventrepostitory {
                 List<TourmateEvent> events=new ArrayList<>();
                 for (DataSnapshot d: dataSnapshot.getChildren()){
                     events.add(d.getValue(TourmateEvent.class));
-                    eventlistDB.postValue(events);
+
                 }
+                eventlistDB.postValue(events);
             }
 
             @Override

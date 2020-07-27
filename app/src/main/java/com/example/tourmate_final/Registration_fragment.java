@@ -15,8 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,8 @@ public class  Registration_fragment extends Fragment {
     private Button registerBTN;
     private TextView showError;
     private Loginviemodel loginviemodel;
+    private RelativeLayout rlayout;
+    private Animation animation;
 
 
     public Registration_fragment() {
@@ -66,6 +71,9 @@ public class  Registration_fragment extends Fragment {
         confirmET=view.findViewById(R.id.userRetypePassword);
         registerBTN=view.findViewById(R.id.registerbutton2);
         showError=view.findViewById(R.id.showtextTV);
+        rlayout=view.findViewById(R.id.rlayout);
+        animation= AnimationUtils.loadAnimation(getContext(),R.anim.uptodowndiagonal);
+        rlayout.setAnimation(animation);
         registerBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
