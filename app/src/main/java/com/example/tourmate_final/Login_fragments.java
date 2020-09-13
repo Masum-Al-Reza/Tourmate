@@ -90,7 +90,7 @@ public class Login_fragments extends Fragment {
                         Navigation.findNavController(view).navigate(R.id.action_login_fragments_to_eventlistfragment);
                         break;
                     case UNAUTHENTICATIONSTATED:
-                        Toast.makeText(getActivity(), "failed", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), "failed", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }

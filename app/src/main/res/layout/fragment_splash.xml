@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Splash">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="140dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:id="@+id/lottieAnimationView"
+        android:layout_centerInParent="true"
+        app:lottie_speed="1.5"
+        app:lottie_fileName="19904-ski-touring-backcountry-skiing.json"
+        />
+    <TextView
+        android:layout_marginTop="6dp"
+        android:layout_below="@id/lottieAnimationView"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:id="@+id/textww"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TourMate"
+        android:gravity="center"
+        android:fontFamily="sans-serif-smallcaps"
+        />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="developed by masum "
+    android:layout_below="@id/textww"
+    android:layout_marginTop="150dp"
+    android:layout_centerInParent="true"
+    />
+
+
+
+</RelativeLayout>

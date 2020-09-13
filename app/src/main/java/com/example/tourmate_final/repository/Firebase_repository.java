@@ -80,7 +80,7 @@ return statelivedata;
                     statelivedata.postValue(Loginviemodel.Authenticationstate.AUTHENTICATIONSTATED);
                     rootref= FirebaseDatabase.getInstance().getReference();
                     userref=rootref.child(firebaseUser.getUid());
-                    userinfo=userref.child("user info");
+                    userinfo=userref.child("Loginfo");
 
                     String userid=firebaseUser.getUid();
                     userInformationPojo.setUesrID(userid);

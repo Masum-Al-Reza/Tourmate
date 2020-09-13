@@ -8,13 +8,19 @@
     app:layout_behavior="@string/bottom_sheet_behavior"
     app:behavior_peekHeight='?actionBarSize'>
 
-        <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-            android:paddingEnd="8dp"
+        android:layout_height="wrap_content"
+        android:paddingEnd="8dp"
+        android:orientation="vertical">
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:background="@color/common_google_signin_btn_text_dark_disabled"
-        android:paddingStart="8dp">
+       >
         >
+
         <ToggleButton
             android:id="@+id/toggleBTN"
             android:layout_width="30dp"
@@ -39,15 +45,22 @@
 
 
 
-    </RelativeLayout>
 
+    </LinearLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:behavior_hideable="true"
+
+            >
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/forecastRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </androidx.recyclerview.widget.RecyclerView>
-
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 
 
 </LinearLayout>

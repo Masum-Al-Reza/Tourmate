@@ -34,14 +34,12 @@ public class Forecast_adapter extends RecyclerView.Adapter<Forecast_adapter.Fore
         LayoutInflater inflater=LayoutInflater.from(context);
         View itemview=inflater.inflate(R.layout.forecastlistrows,parent,false);
         return new Forecast_adapter.Forecastviewholder(itemview);
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull Forecastviewholder holder, int position) {
         holder.tempnameTV.setText(String.valueOf(Math.round(forecastList.get(position).getTemp().getMin()))+Eventutils.DEGREE+tempunit);
         holder.maxtempTV.setText(String.valueOf(Math.round(forecastList.get(position).getTemp().getMax()))+Eventutils.DEGREE+tempunit);
-
         holder.row_forcast_sunrise.setText(Eventutils.getTime(forecastList.get(position).getSunrise()));
         holder.row_forcast_sunset.setText(Eventutils.getTime(forecastList.get(position).getSunset()));
         holder.row_forcast_date.setText((Eventutils.getformatteddate(forecastList.get(position).getDt())));

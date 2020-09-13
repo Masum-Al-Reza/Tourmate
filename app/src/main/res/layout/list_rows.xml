@@ -25,6 +25,7 @@
     android:layout_height="wrap_content"
     android:fontFamily="sans-serif-black"
     android:text="name of tour"
+    android:textColor="@color/colorPurple"
     android:gravity="center"
     android:textSize="28dp"
     android:id="@+id/row_eventName"/>
@@ -45,8 +46,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/row_eventName"
                 android:text="departure"
+
                 android:textSize="16sp"
-                android:textColor="#3D1891"
+                android:textColor="@color/colorPurple"
                 />
     <ImageView
         android:layout_width="wrap_content"
@@ -60,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:text="destination"
                 android:textSize="16sp"
-                android:textColor="#3D1891"
+                android:textColor="@color/colorPurple"
                  />
         </LinearLayout>
             <LinearLayout
@@ -78,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:text=" Going Date:"
                     android:textSize="16sp"
-                    android:textColor="#3B1492" />
+                    android:textColor="@color/colorPurple" />
                 <TextView
                     android:fontFamily="@font/fontlight"
                     android:id="@+id/row_departureDate"
@@ -87,7 +89,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="23/32/12"
                     android:textSize="16sp"
-                    android:textColor="#3B1492" />
+                    android:textColor="@color/colorPurple" />
             </LinearLayout>
             <LinearLayout
 
@@ -107,7 +109,7 @@
                     android:layout_gravity="center"
                     android:text="  Budget:"
                     android:textSize="16sp"
-                    android:textColor="#3B1492"
+                    android:textColor="@color/colorPurple"
                     />
 
                 <TextView
@@ -119,7 +121,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="1000"
                     android:textSize="16sp"
-                    android:textColor="#3B1492"                    />
+                    android:textColor="@color/colorPurple"                    />
 
             </LinearLayout>
             <LinearLayout
@@ -130,7 +132,7 @@
 
                 <TextView
                     android:layout_marginLeft="6dp"
-                    android:textColor="#3B1492"
+                    android:textColor="@color/colorPurple"
                     android:fontFamily="@font/thinfont"
                     android:id="@+id/currenttime"
                     android:layout_width="wrap_content"
@@ -147,7 +149,7 @@
                     android:gravity="center"
                     android:textSize="16sp"
                     android:text="Have a Safe Journey"
-                    android:textColor="#D67285" />
+                    android:textColor="@color/colorPurple" />
 
             </LinearLayout>
 
@@ -172,6 +174,7 @@
                 android:textStyle="bold"
                 android:layout_alignParentEnd="true"
                 android:padding="20dp"
+                android:textColor="@color/colorPurple"
                 android:layout_centerInParent="true"/>
 
         </RelativeLayout>

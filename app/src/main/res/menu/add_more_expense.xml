@@ -5,7 +5,8 @@
         android:id="@+id/add_more_budget"
         android:title="add more Budget"
         android:icon="@drawable/ic_add_black_24dp"
-        app:showAsAction="always"
+        app:showAsAction="never"
+        android:visible="false"
         />
 
 

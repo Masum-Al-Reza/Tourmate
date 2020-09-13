@@ -54,5 +54,8 @@ dependencies {
 
     implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
 
+    //anim
+    implementation 'com.airbnb.android:lottie:3.4.0'
+
 }
 apply plugin: 'com.google.gms.google-services'

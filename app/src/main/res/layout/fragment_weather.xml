@@ -9,8 +9,7 @@
     tools:context=".Weather_fragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <include layout="@layout/bottomsheet"
-        />
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -99,7 +98,9 @@
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="100dp"
-                        android:layout_height="80dp">
+                        android:layout_height="80dp"
+                        android:elevation="20dp"
+                        app:cardCornerRadius="10dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -275,5 +276,6 @@
 
 
      </LinearLayout>-->
-
+    <include layout="@layout/bottomsheet"
+        />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

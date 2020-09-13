@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Map_dashboard" >
+    tools:context=".Map_dashboard">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:weightSum="2">
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/atmCV"
             android:layout_width="0dp"
             android:layout_height="150dp"
-            android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            android:id="@+id/atmCV"
-            android:layout_weight="1">
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            app:cardElevation="10dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -26,7 +34,7 @@
                     android:id="@+id/atmicon"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                   android:layout_centerHorizontal="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="23dp"
                     android:background="@drawable/atmicon" />
 
@@ -34,9 +42,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/atmicon"
-                   android:layout_marginLeft="80dp"
-                   android:textColor="@color/colorAccent"
-                    android:text="ATM" />
+                    android:layout_marginLeft="80dp"
+                    android:text="ATM"
+                    android:textColor="@color/colorAccent" />
 
 
             </RelativeLayout>
@@ -44,12 +52,14 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/hotelCV"
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:id="@+id/hotelCV"
-            android:layout_weight="1">
+            android:layout_weight="1"
+
+            app:cardElevation="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -69,9 +79,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/hotel"
                     android:layout_marginLeft="70dp"
-                    android:textColor="@color/colorAccent"
+                    android:text="HOTEL"
 
-                    android:text="HOTEL" />
+                    android:textColor="@color/colorAccent" />
 
 
             </RelativeLayout>
@@ -80,18 +90,23 @@
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-android:layout_marginTop="10dp"
+        android:layout_marginTop="10dp"
         android:weightSum="2">
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/resturantCV"
             android:layout_width="0dp"
             android:layout_height="150dp"
-            android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            android:id="@+id/resturantCV"
-            android:layout_weight="1">
+            android:layout_marginRight="10dp"
+
+            android:layout_weight="1"
+            app:cardElevation="10dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -109,9 +124,9 @@ android:layout_marginTop="10dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/RESTURANT"
                     android:layout_marginLeft="50dp"
-                    android:textColor="@color/colorAccent"
+                    android:text="RESTURANT"
 
-                    android:text="RESTURANT" />
+                    android:textColor="@color/colorAccent" />
 
 
             </RelativeLayout>
@@ -119,12 +134,14 @@ android:layout_marginTop="10dp"
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/touristCV"
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:id="@+id/touristCV"
-            android:layout_weight="1">
+            android:layout_weight="1"
+
+            app:cardElevation="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -143,9 +160,9 @@ android:layout_marginTop="10dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/hos"
                     android:layout_marginLeft="50dp"
-                    android:textColor="@color/colorAccent"
+                    android:text="TOURIST SPOT"
 
-                    android:text="TOURIST SPOT" />
+                    android:textColor="@color/colorAccent" />
 
 
             </RelativeLayout>
@@ -154,18 +171,23 @@ android:layout_marginTop="10dp"
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:weightSum="2">
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/trainCV"
             android:layout_width="0dp"
             android:layout_height="150dp"
-            android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            android:id="@+id/trainCV"
-            android:layout_weight="1">
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+
+            app:cardElevation="10dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -183,9 +205,9 @@ android:layout_marginTop="10dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/train"
                     android:layout_marginLeft="70dp"
-                    android:textColor="@color/colorAccent"
+                    android:text="TRAIN"
 
-                    android:text="TRAIN" />
+                    android:textColor="@color/colorAccent" />
 
 
             </RelativeLayout>
@@ -193,12 +215,13 @@ android:layout_marginTop="10dp"
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/busCV"
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:id="@+id/busCV"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:cardElevation="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -216,10 +239,10 @@ android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/bus"
-                    android:textColor="@color/colorAccent"
-
                     android:layout_marginLeft="80dp"
-                    android:text="BUS" />
+
+                    android:text="BUS"
+                    android:textColor="@color/colorAccent" />
 
 
             </RelativeLayout>
@@ -229,9 +252,5 @@ android:layout_marginTop="10dp"
 
     </LinearLayout>
 
-
-
-
-
-
+</LinearLayout>
 </LinearLayout>

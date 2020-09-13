@@ -120,7 +120,8 @@ catch (Exception e){
                else {
                     TourmateEvent event=new TourmateEvent(null,eventname,depurture,destination,Integer.parseInt(budget),departureDate, Eventutils.getDateWithTime());
                     eventviewmodel.save(event);
-                    Toast.makeText(getActivity(), "save"+event, Toast.LENGTH_SHORT).show();
+                    Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.eventlistfragment);
+
 
                 }
 
@@ -137,7 +138,7 @@ catch (Exception e){
                 String budget = budgetET.getText().toString();
                 TourmateEvent tourMateEventPojo = new TourmateEvent(updateEventID,eventName,startLocation,destination,Integer.parseInt(budget),departureDate, Eventutils.getDateWithTime());
                 eventviewmodel.update(tourMateEventPojo);
-                Navigation.findNavController(v).navigate(R.id.eventlistfragment);
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.eventlistfragment);
 
             }
         });

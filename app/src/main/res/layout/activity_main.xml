@@ -22,15 +22,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/bg_ui"
+            android:background="@drawable/gradient"
+            app:itemTextColor="@color/colorWhite"
             app:menu="@menu/bottom_menu" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/gradient"
             android:elevation="4dp"
+            app:titleTextColor="@color/colorWhite"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
         <com.google.android.material.tabs.TabLayout
@@ -38,9 +40,10 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_below="@+id/toolbar"
-            android:background="#FF8F01"
+            android:background="@drawable/bg_ui"
             app:tabIconTint="#fff"
             android:elevation="6dp"
+            app:tabTextColor="@color/colorWhite"
            android:minHeight="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
@@ -64,6 +67,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/navigation_header"
+        app:itemTextColor="@color/colorAccent"
         app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -43,11 +43,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
     private NavController navController;
-    private TextView navheadname,navheademail;
+    TextView navheadname,navheademail;
     private boolean isExit = false;
     private boolean isBack = false;
     private TabLayout tabLayout;
     public static String eventid;
+    private String bolod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomNavigationView.setOnNavigationItemSelectedListener(nalistener);
         navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        navheadname=headerView.findViewById(R.id.name_nav);
-        navheademail=headerView.findViewById(R.id.email_nav);
+       navheadname=headerView.findViewById(R.id.nav_userName);
+        navheademail=headerView.findViewById(R.id.nav_email);
         navigationView.setNavigationItemSelectedListener(this);
         navController= Navigation.findNavController(this,R.id.nav_host_fragment);
         drawerLayout = findViewById(R.id.drawerID);
@@ -78,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Event List").setIcon(R.drawable.ic_event_note_black_24dp));
         tabLayout.addTab(tabLayout.newTab().setText("New Event").setIcon(R.drawable.ic_add_circle_black_24dp));
-        tabLayout.setSelected(true);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
@@ -116,6 +116,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             @Override
                             public void onChanged(UserInformationPojo userInformationPojo) {
 
+                                navheademail.setText(userInformationPojo.getUserEmail());
+                                navheadname.setText(userInformationPojo.getUserName());
+
+
                             }
 
                         });
@@ -132,15 +136,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 switch (destination.getId()){
                     case R.id.eventlistfragment:
                         isExit = true;
-tabLayout.getTabAt(0);
-bottomNavigationView.setVisibility(View.GONE);
+                        tabLayout.getTabAt(0);
+                        bottomNavigationView.setVisibility(View.GONE);
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
                             @Override
                             public void run() {
                                 tabLayout.setVisibility(View.VISIBLE);
                                 tabLayout.getTabAt(0).select();
                                 toolbar.setVisibility(View.VISIBLE);
-
                             }
                         });
 break;
@@ -149,6 +152,12 @@ break;
                         tabLayout.setVisibility(View.VISIBLE);
                         isExit=false;
                         isBack=true;
+                        break;
+                    case  R.id.webview_location:
+                        isExit =false;
+                        isBack=true;
+
+                        toolbar.setVisibility(View.GONE);
                         break;
                     case R.id.login_fragments:
                         isExit = true;
@@ -166,16 +175,24 @@ break;
                         isBack=true;
                         isExit=false;
                         break;
+                    case  R.id.splash:
+                        isExit = false;
+                        toolbar.setVisibility(View.GONE);
+                        bottomNavigationView.setVisibility(View.GONE);
+                        tabLayout.setVisibility(View.GONE);
+                        isBack=false;
+                        break;
+
                     case R.id.momentGallary:
                         bottomNavigationView.setVisibility(View.VISIBLE);
-tabLayout.setVisibility(View.GONE);
+                        tabLayout.setVisibility(View.GONE);
                         isBack = true;
                         isExit = false;
                         break;
                         default:
                             bottomNavigationView.setVisibility(View.GONE);
                             tabLayout.setVisibility(View.GONE);
-isExit=false;
+                            isExit=false;
                             break;
                 }
             }

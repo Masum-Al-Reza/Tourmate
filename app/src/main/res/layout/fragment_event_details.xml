@@ -8,13 +8,7 @@
     android:orientation="vertical"
     tools:context=".Event_details">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/detailsEventName"
-            style="@style/TextAppearance.AppCompat.Headline"
-            tools:text="Event name"
-            android:gravity="center"/>
+
     <androidx.cardview.widget.CardView
         android:visibility="gone"
         android:id="@+id/addExpenseCardView"
@@ -37,6 +31,7 @@
                 android:textSize="20sp"
                 android:text="No Expense Found!"
                 android:layout_width="wrap_content"
+                android:textColor="@color/colorAccent"
                 android:layout_height="wrap_content"
                 />
 
@@ -45,6 +40,7 @@
                 android:layout_gravity="center"
                 android:textSize="15sp"
                 android:text="Tap + create one"
+                android:textColor="@color/colorAccent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
@@ -58,23 +54,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/proggresbar"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/detailsEventName">
+       >
         <androidx.cardview.widget.CardView
             android:id="@+id/card"
             android:layout_width="match_parent"
+           app:cardBackgroundColor="@color/colorAccent"
+            app:cardElevation="50dp"
+            app:cardCornerRadius="40dp"
+            android:layout_marginTop="-35dp"
+            android:layout_height="250dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detailsEventName"
+                style="@style/TextAppearance.AppCompat.Headline"
+                tools:text="Event name"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:layout_marginTop="40dp"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"/>
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="30dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="9dp"
+            android:layout_marginTop="90dp"
             app:cardElevation="10dp">
     <LinearLayout
         android:layout_margin="3dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progresall"
         android:weightSum="3">
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
             <RelativeLayout
@@ -124,7 +142,7 @@ android:layout_marginTop="30dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
             <RelativeLayout
@@ -175,7 +193,7 @@ android:layout_marginTop="30dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
             <RelativeLayout
@@ -225,10 +243,11 @@ android:layout_marginTop="30dp"/>
 
         </LinearLayout>
 
-        
-        
-        
+
+
+
     </LinearLayout>
+        </androidx.cardview.widget.CardView>
         </androidx.cardview.widget.CardView>
         <View
             android:id="@+id/voew"

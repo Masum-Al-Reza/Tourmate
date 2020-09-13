@@ -5,19 +5,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Add_event_fragment">
+
     <TextView
-        android:textColor="#171C7A"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="create your tour plan"
+        android:textColor="@color/colorPurple"
+        android:textColorHint="#A61E1E"
         android:textSize="33sp"
-        android:textStyle="bold"
-        android:gravity="center"/>
+        android:textStyle="bold" />
     <View
         android:layout_gravity="center"
         android:layout_width="210dp"
         android:layout_height="1dp"
-        android:background="#20059E"
+        android:background="@color/colorAccent"
         />
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -26,8 +28,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPurple"
+
             android:id="@+id/inputeventname"
             android:gravity="center"
+            android:textColor="@color/colorAccent"
             android:hint="enter event name"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -38,7 +43,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/departureinput"
+            android:textColorHint="@color/colorPurple"
+
             android:gravity="center"
+            android:textColor="@color/colorAccent"
             android:hint="Start location"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -49,8 +57,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/inputdestination"
-            android:gravity="center"
+            android:textColorHint="@color/colorPurple"
 
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
             android:hint="enter destination"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -63,7 +73,9 @@
             android:id="@+id/inputbudget"
             android:inputType="number"
             android:gravity="center"
+            android:textColorHint="@color/colorPurple"
 
+            android:textColor="@color/colorAccent"
             android:hint="enter budget"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -105,7 +117,23 @@
         android:visibility="gone"
         android:textColor="@color/colorWhite" />
 
-
+    <ImageView
+        android:id="@+id/circle3"
+        android:layout_width="182dp"
+        android:layout_height="182dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="-80dp"
+        android:layout_marginBottom="-90dp"
+        android:src="@drawable/circle" />
+    <ImageView
+        android:id="@+id/circle1"
+        android:layout_width="134dp"
+        android:layout_height="134dp"
+        android:layout_below="@+id/bgHeader"
+        android:layout_marginLeft="285dp"
+        android:layout_marginTop="-5dp"
+        android:src="@drawable/circletransparant" />
 
 
 </LinearLayout>

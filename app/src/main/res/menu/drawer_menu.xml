@@ -6,10 +6,13 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-
+            android:textColor="@color/colorPurple"
+            android:icon="@drawable/ic_home_black_24dp"
             android:title="Home" />
         <item
             android:id="@+id/nav_event"
+            android:textColor="@color/colorPurple"
+            android:icon="@drawable/ic_event_note_black_24dp"
             android:title="Event" />
     </group>
 
@@ -19,13 +22,17 @@
             <group android:checkableBehavior="single">
             <item
                 android:id="@+id/nav_nearby"
-
+android:icon="@drawable/ic_location_on_black_24dp"
                 android:title="Nearby Place" />
             <item
                 android:id="@+id/nav_weather"
+                android:textColor="@color/colorPurple"
+                android:icon="@drawable/ic_cloud_queue_black_24dp"
                 android:title="Weather" />
               <item
                 android:id="@+id/nav_compass"
+                  android:icon="@drawable/ic_explore_black_compasicon"
+                  android:textColor="@color/colorPurple"
                 android:title="Compass" />
             </group>
 
@@ -39,19 +46,27 @@
         <menu>
             <item
                 android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share_black_24dp"
+                android:textColor="@color/colorPurple"
                 android:title="Share" />
             <item
                 android:id="@+id/nav_send"
-                android:title="Send" />
+                android:icon="@drawable/aboutinfoicon"
+                android:textColor="@color/colorPurple"
+                android:title="About" />
         </menu>
     </item>
      <item android:title="Privacy">
         <menu>
             <item
                 android:id="@+id/nav_logout"
+                android:icon="@drawable/logouticon"
+                android:textColor="@color/colorPurple"
                 android:title="Logout" />
             <item
                 android:id="@+id/nav_exit"
+                android:textColor="@color/colorPurple"
+                android:icon="@drawable/ic_exit_to_app_black_24dp"
                 android:title="Exit" />
         </menu>
     </item>
